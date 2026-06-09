@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ИИ в университете — медиаэтический проект</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800;900&family=Golos+Text:wght@400;500;600&family=Caveat:wght@500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="progress-bar" id="progress"></div>
+  <div class="grid-background"></div>
+  <div class="grain-overlay"></div>
+
+  <header class="hero-section container-wrap" data-screen-label="Hero">
+    
+  
+    
+    <h1 class="reveal-on-scroll delay-1">
+      Это не сайт.<br>
+      Это <span class="text-bold">игра</span>, где<br>
+      ИИ <span class="text-circled">обманывает<svg viewBox="0 0 200 80" preserveAspectRatio="none"><path d="M16,44 C8,20 70,8 120,10 C172,12 196,26 190,46 C184,66 130,76 80,73 C30,70 6,60 14,38"/></svg></span> вас.
+    </h1>
+    
+    <div class="hero-subtitle-block">
+  <div class="hero-actions reveal-on-scroll delay-3">
+    
+      <a href="#intro" class="btn btn-primary main-hero-btn">
+        Начать игру
+        <span class="scan-line"></span>
+      </a>
+      
+      <p class="handwritten-note">пройди до конца → собери идеальный вуз</p>
+      
+    </div>
+  </div>
+
+    
+  </header>
+
+  <section class="section-container container-wrap" id="intro" data-screen-label="01 Вводная">
+    
+    <div class="section-header reveal-on-scroll">
+      <div class="section-index">01</div>
+      <div class="section-heading-block">
+        <h2>Списывание<br>или инструмент?</h2>
+      </div>
+    </div>
+    
+    <div class="intro-content-grid">
+      <div class="reveal-on-scroll">
+        <p class="lead-text" style="max-width:none;">
+          Студенты привыкли обращаться за помощью к нейросетям. Поэтому запрещать — поздно и бессмысленно. Гораздо разумнее <span class="highlight-text">научить задавать правильные вопросы</span>, проверять факты и честно сообщать, о том, в чем именно помог ИИ.
+        </p>
+        <p class="intro-body-text">
+          Поэтому это не лекция, а игра. Сначала вы изучBте правила четырёх ведущих вузов, потом разберете реальные сценарии нарушений, рассмторите ошибки студентов и в финале сможете собрать идеальный регламент.
+        </p>
+        
+        <div class="ethical-pillars reveal-on-scroll delay-1">
+          <span class="pill-tag">Авторство</span>
+          <span class="pill-tag">Прозрачность</span>
+          <span class="pill-tag">Ответственность</span>
+          <span class="pill-tag">Справедливость проверки</span>
+          <span class="pill-tag">Персональные данные</span>
+        </div>
+      </div>
+      
+      <div class="question-card reveal-on-scroll delay-2">
+        <span class="question-mark">?</span>
+        <h3>Главный вопрос проекта</h3>
+        <p class="question-quote">
+          Как провести границу между <b>допустимой помощью ИИ</b> и подменой самостоятельной работы — и каким должен быть <b>этичный регламент</b> университета?
+        </p>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="section-container container-wrap" id="uni" data-screen-label="02 Вузы">
+    
+    <div class="section-header reveal-on-scroll">
+      <div class="section-index">02</div>
+      <div class="section-heading-block">
+        <h2>Правила<br>четырёх вузов</h2>
+      </div>
+    </div>
+    
+    <div class="regulation-scale reveal-on-scroll">
+      <div class="scale-step">
+        <span class="scale-level">0</span>Запрет
+      </div>
+      <div class="scale-step step-active">
+        <span class="scale-level">1</span>Контроль
+      </div>
+      <div class="scale-step step-active">
+        <span class="scale-level">2</span>Декларация
+      </div>
+      <div class="scale-step step-active">
+        <span class="scale-level">3</span>Обучение
+      </div>
+      <div class="scale-step">
+        <span class="scale-level">4</span>Интеграция
+      </div>
+    </div>
+    
+    <div class="universities-grid">
+      
+      <article class="university-card reveal-on-scroll">
+        <div class="university-top-info">
+          <div class="university-header-row">
+            <div class="university-abbreviation">ВШЭ</div>
+            <div class="status-badge badge-yes">Декларация обязательна</div>
+          </div>
+          <div class="policy-type">«Разрешено, но нужно декларировать»</div>
+        </div>
+        <p class="university-quote">
+          Общего запрета нет. ИИ можно использовать в учебных работах, но студент <span class="highlight-text">обязан выделять</span>, где и как работал ИИ, заполняя форму в LMS в течение 24 часов.
+        </p>
+        
+        <div class="info-rows-list">
+          <div class="info-row">
+            <span class="info-key">ИИ разрешён</span>
+            <span class="info-value"><span class="chip-status status-allowed">да</span></span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Декларация</span>
+            <span class="info-value"><span class="chip-status status-allowed">обязательна в LMS, 24 ч</span></span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Преподаватель вправе</span>
+            <span class="info-value">запретить ИИ для конкретного задания в ПУД</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Запрещено</span>
+            <span class="info-value">скрытый ИИ, фейк‑данные, чужие выводы</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Нарушение</span>
+            <span class="info-value">«0» за работу + официальное замечание</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Только детектор?</span>
+            <span class="info-value"><span class="chip-status status-forbidden">нет — нужна экспертиза</span></span>
+          </div>
+        </div>
+        
+        <div class="university-key-principle">
+          <span class="principle-label">Ключевой принцип</span>
+          <span class="principle-value">Прозрачность на каждом шаге</span>
+        </div>
+      </article>
+      
+      <article class="university-card reveal-on-scroll delay-1">
+        <div class="university-top-info">
+          <div class="university-header-row">
+            <div class="university-abbreviation">МГУ</div>
+            <div class="status-badge badge-maybe">Зависит от факультета</div>
+          </div>
+          <div class="policy-type">«По умолчанию можно, ответственность на вас»</div>
+        </div>
+        <p class="university-quote">
+          Разрешён при полной прозрачности (правила Экономфака). Необходимо указать модель, разделы и цели. <span class="highlight-text">Можно не декларировать</span>, если ИИ был лишь поисковиком.
+        </p>
+        
+        <div class="info-rows-list">
+          <div class="info-row">
+            <span class="info-key">ИИ разрешён</span>
+            <span class="info-value"><span class="chip-status status-allowed">да</span></span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Декларация</span>
+            <span class="info-value"><span class="chip-status status-allowed">да — модель, разделы, цель</span></span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Исключение</span>
+            <span class="info-value">ИИ как поисковик — декларировать не нужно</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Запрещено</span>
+            <span class="info-value">соавторство ИИ, скрытая генерация, фабрикация</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Нарушение</span>
+            <span class="info-value">академическая нечестность, вплоть до отчисления</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Только детектор?</span>
+            <span class="info-value"><span class="chip-status status-forbidden">нет</span></span>
+          </div>
+        </div>
+        
+        <div class="university-key-principle">
+          <span class="principle-label">Ключевой принцип</span>
+          <span class="principle-value">ИИ — инструмент, не соавтор</span>
+        </div>
+      </article>
+      
+      <article class="university-card reveal-on-scroll delay-2">
+        <div class="university-top-info">
+          <div class="university-header-row">
+            <div class="university-abbreviation">МФТИ</div>
+            <div class="status-badge badge-free">Самый лояльный</div>
+          </div>
+          <div class="policy-type">«ИИ — это ассистент, запрета нет»</div>
+        </div>
+        <p class="university-quote">
+          ИИ разрешён полностью, даже в дипломах. В учёбе декларировать <span class="highlight-text">не нужно</span> — только в научных публикациях. Главный критерий — понимание на устном опросе.</p>
+        
+        <div class="info-rows-list">
+          <div class="info-row">
+            <span class="info-key">ИИ разрешён</span>
+            <span class="info-value"><span class="chip-status status-allowed">да, полностью, включая дипломы</span></span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Декларация в учёбе</span>
+            <span class="info-value"><span class="chip-status status-forbidden">не требуется</span></span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Декларация в науке</span>
+            <span class="info-value"><span class="chip-status status-allowed">только публикации</span></span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Критерий честности</span>
+            <span class="info-value">устный опрос — объясни свою работу</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Запрещено</span>
+            <span class="info-value">генерировать научные выводы без указания</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Только детектор?</span>
+            <span class="info-value"><span class="chip-status status-forbidden">нет — решает устный опрос</span></span>
+          </div>
+        </div>
+        
+        <div class="university-key-principle">
+          <span class="principle-label">Ключевой принцип</span>
+          <span class="principle-value">Понимание важнее происхождения текста</span>
+        </div>
+      </article>
+      
+      <article class="university-card reveal-on-scroll delay-3">
+        <div class="university-top-info">
+          <div class="university-header-row">
+            <div class="university-abbreviation">ИТМО</div>
+            <div class="status-badge badge-yes">Декларация обязательна</div>
+          </div>
+          <div class="policy-type">«ИИ — цифровой ассистент и партнёр»</div>
+        </div>
+        <p class="university-quote">
+          ИИ разрешён, документ принят в 2024. Нужен раздел <span class="highlight-text">«Декларация о применении ИИ»</span>. Запрещено грузить закрытые данные ИТМО в чужие нейросети.
+        </p>
+        
+        <div class="info-rows-list">
+          <div class="info-row">
+            <span class="info-key">ИИ разрешён</span>
+            <span class="info-value"><span class="chip-status status-allowed">да</span></span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Декларация</span>
+            <span class="info-value"><span class="chip-status status-allowed">обязательный раздел в работе</span></span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Партнёры</span>
+            <span class="info-value">внутренние системы ИТМО, YandexGPT</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Запрещено</span>
+            <span class="info-value">скрытый ИИ, ИИ‑автор, загрузка закрытых данных</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Нарушение</span>
+            <span class="info-value">недопуск к защите, служба безопасности</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Только детектор?</span>
+            <span class="info-value"><span class="chip-status status-forbidden">нет</span></span>
+          </div>
+        </div>
+        
+        <div class="university-key-principle">
+          <span class="principle-label">Ключевой принцип</span>
+          <span class="principle-value">Безопасность данных + прозрачность</span>
+        </div>
+      </article>
+      
+    </div>
+    
+    <div class="comparison-table-wrap reveal-on-scroll">
+      <div class="comparison-label">Сравнение подходов</div>
+      
+      <div class="comparison-grid">
+        <div class="comparison-row table-header">
+          <div class="comparison-cell"></div>
+          <div class="comparison-cell">ВШЭ</div>
+          <div class="comparison-cell">МГУ</div>
+          <div class="comparison-cell">МФТИ</div>
+          <div class="comparison-cell">ИТМО</div>
+        </div>
+        
+        <div class="comparison-row">
+          <div class="comparison-cell cell-label">ИИ разрешён</div>
+          <div class="comparison-cell"><span class="dot-allowed">✓</span></div>
+          <div class="comparison-cell"><span class="dot-allowed">✓</span></div>
+          <div class="comparison-cell"><span class="dot-allowed">✓</span></div>
+          <div class="comparison-cell"><span class="dot-allowed">✓</span></div>
+        </div>
+        
+        <div class="comparison-row">
+          <div class="comparison-cell cell-label">Декларация</div>
+          <div class="comparison-cell"><span class="dot-allowed">✓</span></div>
+          <div class="comparison-cell"><span class="dot-allowed">✓</span></div>
+          <div class="comparison-cell"><span class="dot-forbidden">–</span></div>
+          <div class="comparison-cell"><span class="dot-allowed">✓</span></div>
+        </div>
+        
+        <div class="comparison-row">
+          <div class="comparison-cell cell-label">Устный опрос</div>
+          <div class="comparison-cell"><span class="dot-forbidden">–</span></div>
+          <div class="comparison-cell"><span class="dot-forbidden">–</span></div>
+          <div class="comparison-cell"><span class="dot-allowed">✓</span></div>
+          <div class="comparison-cell"><span class="dot-forbidden">–</span></div>
+        </div>
+        
+        <div class="comparison-row">
+          <div class="comparison-cell cell-label">Запрет данных</div>
+          <div class="comparison-cell"><span class="dot-forbidden">–</span></div>
+          <div class="comparison-cell"><span class="dot-forbidden">–</span></div>
+          <div class="comparison-cell"><span class="dot-forbidden">–</span></div>
+          <div class="comparison-cell"><span class="dot-allowed">✓</span></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="section-cta reveal-on-scroll">
+      <a href="#cases" class="btn btn-primary">Перейти к кейсам →</a>
+    </div>
+
+  </section>
+
+  <section class="section-container container-wrap" id="cases" data-screen-label="03 Кейсы">
+    
+    <div class="section-header reveal-on-scroll">
+      <div class="section-index">03</div>
+      <div class="section-heading-block">
+        <h2>В чем ошибка<br>студентов?</h2>
+      </div>
+    </div>
+    
+    <div class="case-progress-bar reveal-on-scroll">
+      <div class="progress-steps-container">
+        <div class="progress-step step-active" data-step="0">
+          <span class="progress-dot"></span>
+          <span class="student-name">Влад</span>
+        </div>
+        <div class="progress-line"></div>
+        
+        <div class="progress-step" data-step="1">
+          <span class="progress-dot"></span>
+          <span class="student-name">Лера</span>
+        </div>
+        <div class="progress-line"></div>
+        
+        <div class="progress-step" data-step="2">
+          <span class="progress-dot"></span>
+          <span class="student-name">Александра</span>
+        </div>
+        <div class="progress-line"></div>
+        
+        <div class="progress-step" data-step="3">
+          <span class="progress-dot"></span>
+          <span class="student-name">Матвей</span>
+        </div>
+        <div class="progress-line"></div>
+        
+        <div class="progress-step" data-step="4">
+          <span class="progress-dot"></span>
+          <span class="student-name">Дамир</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="cases-carousel-wrapper" id="caseCarousel">
+      
+      <article class="case-card-item card-active" data-case="0">
+        <div class="case-card-top-row">
+          
+          <div class="case-card-left-column">
+            <div class="case-badge-block">
+              <span class="case-number">01</span>
+              <span class="case-tag-label">призма авторства</span>
+            </div>
+            <h3 class="case-student-title">Влад · ВШЭ, ФКН</h3>
+            <p class="case-subtitle-description">Сдал код нейросети там, где ИИ был прямо запрещён</p>
+            
+            <div class="case-story-text">
+              <p>Влад делал лабораторную по анализу данных. В программе курса преподаватель прямо запретил использовать генеративные модели — ни для кода, ни для разбора графиков.</p>
+              <p>Влад попросил ИИ: «Напиши скрипт, усложни код и добавь выводы по графикам с умными формулировками». Нейросеть выдала аккуратный профессиональный код. Влад скопировал всё в работу — не указав ИИ и не заполнив форму в LMS.</p>
+              <p>Преподаватель сразу увидел продвинутые библиотеки, которых на лекциях ещё не было. На устном опросе Влад не смог объяснить ни строки своего «кода». Работу аннулировали, поставили «0».</p>
+            </div>
+            
+            <div class="case-analysis-lens">
+              <div class="lens-question">Можно ли считать его автором?</div>
+              <div class="lens-answer">Нет. Если студент просто переносит готовый скрипт — он курьер, не автор. Помощь — ИИ нашёл ошибку. Подмена — «сделай задачу с нуля».</div>
+            </div>
+          </div>
+          
+          <div class="case-card-right-column">
+            <div class="case-visual-container photo-code">
+              <div class="code-art-mockup">
+                <div class="code-line"><span class="code-keyword">import</span> <span class="code-variable">pandas</span> as <span class="code-variable">pd</span></div>
+                <div class="code-line"><span class="code-keyword">import</span> <span class="code-variable">numpy</span> as <span class="code-variable">np</span></div>
+                <div class="code-line"></div>
+                <div class="code-line"><span class="code-function">def</span> <span class="code-name">analyze</span>(df):</div>
+                <div class="code-line indent-1">result = df.<span class="code-function">groupby</span>(</div>
+                <div class="code-line indent-2"><span class="code-string">'category'</span></div>
+                <div class="code-line indent-1">).<span class="code-function">agg</span>({</div>
+                <div class="code-line indent-2"><span class="code-string">'value'</span>: [<span class="code-string">'mean'</span>,</div>
+                <div class="code-line indent-3"><span class="code-string">'std'</span>, <span class="code-string">'count'</span>]</div>
+                <div class="code-line indent-1">})</div>
+                <div class="code-line indent-1"><span class="code-keyword">return</span> result</div>
+                <div class="code-typing-cursor">|</div>
+              </div>
+              <div class="visual-label">
+                <span class="ai-generation-badge">ИИ генерировал</span>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        
+        <div class="case-quiz-section">
+          <div class="quiz-header-block">
+            <span class="quiz-status-icon">⚡</span>
+            <div>
+              <div class="quiz-title-text">Что нарушил Влад?</div>
+              <div class="quiz-subtitle-text">Отметь все верные варианты — только потом откроется следующий кейс</div>
+            </div>
+          </div>
+          
+          <div class="quiz-options-list">
+            <button class="quiz-option-button" data-c="1">
+              <span class="checkbox-box"></span>
+              <span>Проигнорировал прямой запрет ИИ в программе курса</span>
+            </button>
+            <button class="quiz-option-button" data-c="1">
+              <span class="checkbox-box"></span>
+              <span>Скрыл использование ИИ и не заполнил форму</span>
+            </button>
+            <button class="quiz-option-button" data-c="1">
+              <span class="checkbox-box"></span>
+              <span>Переложил анализ и выводы на нейросеть</span>
+            </button>
+            <button class="quiz-option-button" data-c="0">
+              <span class="checkbox-box"></span>
+              <span>Использовал ИИ только для проверки орфографии</span>
+            </button>
+          </div>
+          
+          <div class="quiz-control-bar">
+            <button class="btn btn-primary quiz-check-action">Проверить</button>
+            <span class="quiz-result-message"></span>
+          </div>
+        </div>
+        
+        <div class="case-next-step-block" style="display:none;">
+          <div class="next-step-success-text">Нарушения найдены верно!</div>
+          <button class="btn btn-primary next-case-action">Следующий кейс →</button>
+        </div>
+      </article>
+      
+      <article class="case-card-item" data-case="1">
+        <div class="case-card-top-row">
+          
+          <div class="case-card-left-column">
+            <div class="case-badge-block">
+              <span class="case-number">02</span>
+              <span class="case-tag-label">призма прозрачности</span>
+            </div>
+            <h3 class="case-student-title">Лера · МГУ, медиапроект</h3>
+            <p class="case-subtitle-description">Записала ChatGPT в соавторы и дописала реплики спикеров</p>
+            
+            <div class="case-story-text">
+              <p>Лера готовила лонгрид с интервью. Она реально пообщалась с экспертами, но их ответы были слишком короткими. Тогда она попросила ChatGPT: «Допиши развёрнутые красивые абзацы — оформи как готовые реплики».</p>
+              <p>«Антиплагиат» показал 95% оригинальности, и Лера решила, что обсуждать ничего не нужно. Она просто подписала материал: «В соавторстве с ChatGPT».</p>
+              <p>По правилам МГУ нейросеть нельзя записывать в соавторы, а скрытая генерация чужих высказываний — академическое мошенничество. Материал аннулировали, Лере объявили выговор.</p>
+            </div>
+            
+            <div class="case-analysis-lens">
+              <div class="lens-question">Почему 95% оригинальности — не оправдание?</div>
+              <div class="lens-answer">Высокий процент — лишь технический результат алгоритма, не доказательство авторства. Нужно указать: модель, разделы, цель и способ применения.</div>
+            </div>
+          </div>
+          
+          <div class="case-card-right-column">
+            <div class="case-visual-container photo-chat">
+              <div class="chat-art-mockup">
+                <div class="chat-message message-left">
+                  <div class="chat-speech-bubble">Расскажите о проблеме плагиата в вузах?</div>
+                  <div class="chat-sender-name">Лера</div>
+                </div>
+                
+                <div class="chat-message message-right">
+                  <div class="chat-speech-bubble bubble-real">«Это серьёзно»</div>
+                  <div class="chat-sender-name">Эксперт</div>
+                </div>
+                
+                <div class="chat-message message-right message-ai">
+                  <div class="chat-speech-bubble bubble-fake">«Проблема плагиата достигла критического масштаба и требует немедленного системного переосмысления подходов к академической честности в современном университетском образовании...»</div>
+                  <div class="chat-sender-name">ChatGPT <span class="ai-label-tag">ИИ</span></div>
+                </div>
+              </div>
+              <div class="visual-label">
+                <span class="ai-generation-badge status-warn">фабрикация цитат</span>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        
+        <div class="case-quiz-section">
+          <div class="quiz-header-block">
+            <span class="quiz-status-icon">⚡</span>
+            <div>
+              <div class="quiz-title-text">Что нарушила Лера?</div>
+              <div class="quiz-subtitle-text">Отметь все верные варианты</div>
+            </div>
+          </div>
+          
+          <div class="quiz-options-list">
+            <button class="quiz-option-button" data-c="1">
+              <span class="checkbox-box"></span>
+              <span>Записала ChatGPT в соавторы</span>
+            </button>
+            <button class="quiz-option-button" data-c="1">
+              <span class="checkbox-box"></span>
+              <span>Скрытая генерация чужих реплик</span>
+            </button>
+            <button class="quiz-option-button" data-c="1">
+              <span class="checkbox-box"></span>
+              <span>Приписала спикерам несказанное (фабрикация)</span>
+            </button>
+            <button class="quiz-option-button" data-c="0">
+              <span class="checkbox-box"></span>
+              <span>Честно указала модель, разделы и цель</span>
+            </button>
+          </div>
+          
+          <div class="quiz-control-bar">
+            <button class="btn btn-primary quiz-check-action">Проверить</button>
+            <span class="quiz-result-message"></span>
+          </div>
+        </div>
+        
+        <div class="case-next-step-block" style="display:none;">
+          <div class="next-step-success-text">Нарушения найдены верно!</div>
+          <button class="btn btn-primary next-case-action">Следующий кейс →</button>
+        </div>
+      </article>
+      
+      <article class="case-card-item" data-case="2">
+        <div class="case-card-top-row">
+          
+          <div class="case-card-left-column">
+            <div class="case-badge-block">
+              <span class="case-number">03</span>
+              <span class="case-tag-label">призма ответственности</span>
+            </div>
+            <h3 class="case-student-title">Александра · ВШЭ, 1 курс</h3>
+            <p class="case-subtitle-description">Сгенерировала фейковые данные и несуществующие источники</p>
+            
+            <div class="case-story-text">
+              <p>Из‑за дедлайнов Александра написала часть группового проекта с помощью ИИ. Литературы не хватало — она сгенерировала фейковые статистические данные.</p>
+              <p>Команда честно задекларировала ИИ для поиска источников — по всем правилам ВШЭ. Но на защите преподаватель начал переходить по ссылкам: источников не существовало.</p>
+              <p>Александра стала защищаться: «аналитику я сделала сама, а ненастоящие данные — проблема ИИ». Преподаватель не согласился и поставил команде «0»: студентка переложила ответственность на нейросеть.</p>
+            </div>
+            
+            <div class="case-analysis-lens">
+              <div class="lens-question">Кто отвечает за результат?</div>
+              <div class="lens-answer">Студент — полностью. Если ответ ИИ оказался фейком, виноват тот, кто решил его использовать и не проверил.</div>
+            </div>
+          </div>
+          
+          <div class="case-card-right-column">
+            <div class="case-visual-container photo-data">
+              <div class="data-art-mockup">
+                <div class="chart-bars-container">
+                  <div class="bar-item bar-1"><span class="bar-value">73%</span></div>
+                  <div class="bar-item bar-2"><span class="bar-value">91%</span></div>
+                  <div class="bar-item bar-3"><span class="bar-value">58%</span></div>
+                  <div class="bar-item bar-4"><span class="bar-value">84%</span></div>
+                </div>
+                
+                <div class="chart-references-list">
+                  <div class="reference-item status-error">Ivanov, 2023 <span class="error-cross">✗ 404</span></div>
+                  <div class="reference-item status-error">Smith et al., 2024 <span class="error-cross">✗ 404</span></div>
+                  <div class="reference-item status-error">РАН, 2022 <span class="error-cross">✗ 404</span></div>
+                </div>
+              </div>
+              <div class="visual-label">
+                <span class="ai-generation-badge status-warn">фейковые данные</span>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        
+        <div class="case-quiz-section">
+          <div class="quiz-header-block">
+            <span class="quiz-status-icon">⚡</span>
+            <div>
+              <div class="quiz-title-text">Что нарушила Александра?</div>
+              <div class="quiz-subtitle-text">Отметь все верные варианты</div>
+            </div>
+          </div>
+          
+          <div class="quiz-options-list">
+            <button class="quiz-option-button" data-c="1">
+              <span class="checkbox-box"></span>
+              <span>Сгенерировала фейковые статданные</span>
+            </button>
+            <button class="quiz-option-button" data-c="1">
+              <span class="checkbox-box"></span>
+              <span>Использовала несуществующие источники</span>
+            </button>
+            <button class="quiz-option-button" data-c="1">
+              <span class="checkbox-box"></span>
+              <span>Переложила ответственность за ошибки на ИИ</span>
+            </button>
+            <button class="quiz-option-button" data-c="0">
+              <span class="checkbox-box"></span>
+              <span>Самостоятельно проверила все ссылки</span>
+            </button>
+          </div>
+          
+          <div class="quiz-control-bar">
+            <button class="btn btn-primary quiz-check-action">Проверить</button>
+            <span class="quiz-result-message"></span>
+          </div>
+        </div>
+        
+        <div class="case-next-step-block" style="display:none;">
+          <div class="next-step-success-text">Нарушения найдены верно!</div>
+          <button class="btn btn-primary next-case-action">Следующий кейс →</button>
+        </div>
+      </article>
+      
+      <article class="case-card-item role-professor" data-case="3">
+        <div class="case-card-top-row">
+          
+          <div class="case-card-left-column">
+            <div class="case-badge-block">
+              <span class="case-number">04</span>
+              <span class="case-tag-label">призма справедливости</span>
+            </div>
+            <h3 class="case-student-title">Матвей · МФТИ, 4 курс</h3>
+            <p class="case-subtitle-description alert-warning">⚠ Здесь правила нарушил преподаватель, а не студент</p>
+            
+            <div class="case-story-text">
+              <p>Матвей сдал курсовую, которую написал полностью сам. Через время он узнал, что работу аннулировали: «Антиплагиат» показал 30% «ИИ‑текста».</p>
+              <p>Матвей предложил рассказать всю работу устно и ответить на любые вопросы — но руководитель отказался и опёрся только на отчёт детектора.</p>
+              <p>Матвей пошёл к вышестоящим. В итоге работу приняли к защите: в МФТИ ИИ не запрещён, а правил декларировать его в учёбе нет. Виноват оказался не студент.</p>
+            </div>
+            
+            <div class="case-analysis-lens">
+              <div class="lens-question">Доказывает ли процент самостоятельность?</div>
+              <div class="lens-answer">Нет. Детекторы часто ошибаются и дают ложноположительные срабатывания. Решает человек через устный опрос, а не алгоритм.</div>
+            </div>
+          </div>
+          
+          <div class="case-card-right-column">
+            <div class="case-visual-container photo-scale">
+              <div class="scale-art-mockup">
+                <div class="scale-top-part">
+                  <div class="scale-balance-beam">
+                    <div class="scale-pan pan-left tilt-left-animation">
+                      <div class="pan-inner-content">
+                        <div class="pan-graphic-icon">📋</div>
+                        <div class="pan-caption-text">Детектор<br>30% ИИ</div>
+                      </div>
+                    </div>
+                    
+                    <div class="scale-center-pole"></div>
+                    
+                    <div class="scale-pan pan-right tilt-right-animation">
+                      <div class="pan-inner-content">
+                        <div class="pan-graphic-icon">🎤</div>
+                        <div class="pan-caption-text">Устный<br>опрос</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="scale-final-verdict">Детектор ≠ доказательство</div>
+              </div>
+              <div class="visual-label">
+                <span class="ai-generation-badge role-professor">нарушение препода</span>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        
+        <div class="case-quiz-section">
+          <div class="quiz-header-block">
+            <span class="quiz-status-icon">⚡</span>
+            <div>
+              <div class="quiz-title-text">Кто и что здесь нарушил?</div>
+              <div class="quiz-subtitle-text">Отметь все верные варианты</div>
+            </div>
+          </div>
+          
+          <div class="quiz-options-list">
+            <button class="quiz-option-button" data-c="1">
+              <span class="checkbox-box"></span>
+              <span>Преподаватель отклонил работу за сам факт ИИ</span>
+            </button>
+            <button class="quiz-option-button" data-c="1">
+              <span class="checkbox-box"></span>
+              <span>Преподаватель отказал в устном опросе</span>
+            </button>
+            <button class="quiz-option-button" data-c="1">
+              <span class="checkbox-box"></span>
+              <span>Преподаватель решил только по детектору</span>
+            </button>
+            <button class="quiz-option-button" data-c="0">
+              <span class="checkbox-box"></span>
+              <span>Студент Матвей скрыл использование ИИ</span>
+            </button>
+          </div>
+          
+          <div class="quiz-control-bar">
+            <button class="btn btn-primary quiz-check-action">Проверить</button>
+            <span class="quiz-result-message"></span>
+          </div>
+        </div>
+        
+        <div class="case-next-step-block" style="display:none;">
+          <div class="next-step-success-text">Нарушения найдены верно!</div>
+          <button class="btn btn-primary next-case-action">Следующий кейс →</button>
+        </div>
+      </article>
+      
+      <article class="case-card-item" data-case="4">
+        <div class="case-card-top-row">
+          
+          <div class="case-card-left-column">
+            <div class="case-badge-block">
+              <span class="case-number">05</span>
+              <span class="case-tag-label">призма персональных данных</span>
+            </div>
+            <h3 class="case-student-title">Дамир · ИТМО, 3 курс</h3>
+            <p class="case-subtitle-description">Залил закрытые данные исследований в чужую нейросеть</p>
+            
+            <div class="case-story-text">
+              <p>Дамир работал с закрытыми данными исследований ИТМО. Он использовал нейросеть для оптимизации процессов — это разрешено. Но загрузил в чат‑бот файл с закрытыми данными, которые нельзя распространять.</p>
+              <p>Осознав ошибку, Дамир решил скрыть факт использования ИИ. Научный руководитель заметил незадекларированный ИИ и попросил переоформить работу.</p>
+              <p>При повторной проверке выяснилось, что студент обращался к нейросети с закрытыми данными. Это привело к недопуску к защите и передаче дела в службу безопасности.</p>
+            </div>
+            
+            <div class="case-analysis-lens">
+              <div class="lens-question">Чем нельзя загружать в ИИ?</div>
+              <div class="lens-answer">Персональные данные, закрытые материалы, медицинские сведения, внутренние документы. Для ИТМО — только внутренние одобренные системы.</div>
+            </div>
+          </div>
+          
+          <div class="case-card-right-column">
+            <div class="case-visual-container photo-lock">
+              <div class="lock-art-mockup">
+                <div class="lock-graphic-icon">
+                  <div class="lock-body-shape">
+                    <div class="lock-surface-crack"></div>
+                  </div>
+                  <div class="lock-shackle-loop status-broken"></div>
+                </div>
+                
+                <div class="data-leak-stream">
+                  <div class="stream-file-item">research_data_2024.xlsx</div>
+                  <div class="stream-file-item">patient_records.csv</div>
+                  <div class="stream-file-item">classified_report.pdf</div>
+                  <div class="stream-arrow-indicator">→ ChatGPT</div>
+                </div>
+              </div>
+              <div class="visual-label">
+                <span class="ai-generation-badge status-warn">утечка данных</span>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        
+        <div class="case-quiz-section">
+          <div class="quiz-header-block">
+            <span class="quiz-status-icon">⚡</span>
+            <div>
+              <div class="quiz-title-text">Что нарушил Дамир?</div>
+              <div class="quiz-subtitle-text">Отметь все верные варианты</div>
+            </div>
+          </div>
+          
+          <div class="quiz-options-list">
+            <button class="quiz-option-button" data-c="1">
+              <span class="checkbox-box"></span>
+              <span>Загрузил закрытые данные в чужую нейросеть</span>
+            </button>
+            <button class="quiz-option-button" data-c="1">
+              <span class="checkbox-box"></span>
+              <span>Нарушил коммерческую тайну ИТМО</span>
+            </button>
+            <button class="quiz-option-button" data-c="1">
+              <span class="checkbox-box"></span>
+              <span>Скрыл факт использования ИИ</span>
+            </button>
+            <button class="quiz-option-button" data-c="0">
+              <span class="checkbox-box"></span>
+              <span>Задекларировал ИИ по всем правилам</span>
+            </button>
+          </div>
+          
+          <div class="quiz-control-bar">
+            <button class="btn btn-primary quiz-check-action">Проверить</button>
+            <span class="quiz-result-message"></span>
+          </div>
+        </div>
+        
+        <div class="case-next-step-block final-case-step" style="display:none;">
+          <div class="next-step-success-text">Все 5 кейсов пройдены! Теперь задекларируй сам →</div>
+          <button class="btn btn-primary next-case-action">Перейти к заданию</button>
+        </div>
+      </article>
+      
+    </div>
+  </section>
+
+  <section class="section-container container-wrap" id="declare" data-screen-label="04 Декларация">
+    
+    <div class="section-header reveal-on-scroll">
+      <div class="section-index">04</div>
+      <div class="section-heading-block">
+        <h2>Задекларируй<br>сам</h2>
+      </div>
+    </div>
+    
+    <div class="declaration-task-wrapper reveal-on-scroll">
+      <div class="scenario-context-box">
+        <span class="context-badge-tag">Концепт</span>
+        <p>Ты студент ВШЭ. При написании введения к курсовой ты использовал ChatGPT-4o для структурирования текста. Основной анализ и выводы ты написал самостоятельно, все источники проверил вручную. Заполни декларацию правильно.</p>
+      </div>
+      
+      <div class="declaration-form-slide" id="declSlide">
+        <div class="form-slide-header">
+          <div class="form-university-logo">ВШЭ</div>
+          <div class="form-main-title">ДЕКЛАРАЦИЯ ОБ ИСПОЛЬЗОВАНИИ ИИ</div>
+        </div>
+        
+        <div class="form-metadata-row">
+          <span>Студент: Иванова А.В.</span>
+          <span>Курс: 2</span>
+          <span>Дата: 15.05.2025</span>
+        </div>
+        
+        <div class="form-fields-stack">
+          <div class="form-input-field">
+            <div class="field-label-text">Инструмент ИИ (модель)</div>
+            <div class="field-drop-zone" data-slot="tool" ondragover="event.preventDefault();this.classList.add('over')" ondragleave="this.classList.remove('over')" ondrop="handleDrop(event,this)">
+              <span class="drop-zone-placeholder">Перетащи сюда</span>
+            </div>
+          </div>
+          
+          <div class="form-input-field">
+            <div class="field-label-text">Разделы, где использовался ИИ</div>
+            <div class="field-drop-zone" data-slot="section" ondragover="event.preventDefault();this.classList.add('over')" ondragleave="this.classList.remove('over')" ondrop="handleDrop(event,this)">
+              <span class="drop-zone-placeholder">Перетащи сюда</span>
+            </div>
+          </div>
+          
+          <div class="form-input-field">
+            <div class="field-label-text">Цель использования</div>
+            <div class="field-drop-zone" data-slot="goal" ondragover="event.preventDefault();this.classList.add('over')" ondragleave="this.classList.remove('over')" ondrop="handleDrop(event,this)">
+              <span class="drop-zone-placeholder">Перетащи сюда</span>
+            </div>
+          </div>
+          
+          <div class="form-input-field">
+            <div class="field-label-text">Что написано самостоятельно</div>
+            <div class="field-drop-zone" data-slot="self" ondragover="event.preventDefault();this.classList.add('over')" ondragleave="this.classList.remove('over')" ondrop="handleDrop(event,this)">
+              <span class="drop-zone-placeholder">Перетащи сюда</span>
+            </div>
+          </div>
+          
+          <div class="form-input-field">
+            <div class="field-label-text">Ответственность за содержание</div>
+            <div class="field-drop-zone" data-slot="resp" ondragover="event.preventDefault();this.classList.add('over')" ondragleave="this.classList.remove('over')" ondrop="handleDrop(event,this)">
+              <span class="drop-zone-placeholder">Перетащи сюда</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-slide-footer">
+          <div class="form-signature-line">Подпись: ___________</div>
+          <div class="form-validation-status" id="declStatus"></div>
+        </div>
+      </div>
+      
+      <div class="fragments-pool-wrapper" id="declPool">
+        <div class="pool-header-label">Доступные фрагменты — перетащи верные в форму:</div>
+        
+        <div class="pool-items-container">
+          <div class="draggable-fragment-item" id="frag-tool" draggable="true" data-slot="tool" ondragstart="handleDragStart(event)">ChatGPT-4o</div>
+          <div class="draggable-fragment-item distractor-item" id="frag-bad1" draggable="true" data-slot="bad" ondragstart="handleDragStart(event)">ИИ написал всё сам</div>
+          <div class="draggable-fragment-item" id="frag-section" draggable="true" data-slot="section" ondragstart="handleDragStart(event)">Введение</div>
+          <div class="draggable-fragment-item" id="frag-goal" draggable="true" data-slot="goal" ondragstart="handleDragStart(event)">Структурирование текста</div>
+          <div class="draggable-fragment-item distractor-item" id="frag-bad2" draggable="true" data-slot="bad" ondragstart="handleDragStart(event)">Проверка не проводилась</div>
+          <div class="draggable-fragment-item" id="frag-self" draggable="true" data-slot="self" ondragstart="handleDragStart(event)">Основной анализ и выводы</div>
+          <div class="draggable-fragment-item distractor-item" id="frag-bad3" draggable="true" data-slot="bad" ondragstart="handleDragStart(event)">Вся работа целиком</div>
+          <div class="draggable-fragment-item" id="frag-resp" draggable="true" data-slot="resp" ondragstart="handleDragStart(event)">Полная ответственность на студенте</div>
+        </div>
+      </div>
+      
+      <div class="declaration-control-bar">
+        <button class="btn btn-primary" id="declCheck">Проверить декларацию</button>
+        <button class="btn btn-ghost" id="declReset" style="display:none;">Сбросить</button>
+        <span class="declaration-hint-text" id="declHint"></span>
+      </div>
+      
+      <div class="declaration-success-overlay" id="declSuccess" style="display:none;">
+        <div class="success-icon-badge">✓</div>
+        <div class="success-message-text">Декларация заполнена верно! Теперь проверь свои знания в игре.</div>
+        <a href="#game" class="btn btn-primary">Перейти к игре →</a>
+      </div>
+    </div>
+
+  </section>
+
+  
+
+  <section class="section-container container-wrap" id="ideal" data-screen-label="06 Идеальный вуз">
+    
+    <div class="ideal-university-wrapper reveal-on-scroll">
+      <div class="game-inner-grid"></div>
+      <span class="sub-kicker">финальный уровень · авторская модель</span>
+      <h2>Наш идеальный вуз:<br>не запрещает,<br>а учит</h2>
+      <p class="ideal-subtitle">Сбалансированная модель: ИИ разрешён, но регулируется через прозрачность, ответственность и обучение. Девять правил, которые закрывают все пять кейсов выше.</p>
+      
+      <div class="rules-manifesto-grid">
+        <div class="rule-manifesto-item reveal-on-scroll">
+          <div class="rule-index-number">01</div>
+          <h4>ИИ — инструмент, не автор</h4>
+          <p>Разрешён как ассистент, но никогда не вносится в авторы и не подменяет самостоятельную работу.</p>
+        </div>
+        
+        <div class="rule-manifesto-item reveal-on-scroll delay-1">
+          <div class="rule-index-number">02</div>
+          <h4>Ответственность на человеке</h4>
+          <p>Студент отвечает за текст, факты, выводы и источники. Ошибка ИИ — это ошибка студента.</p>
+        </div>
+        
+        <div class="rule-manifesto-item reveal-on-scroll delay-2">
+          <div class="rule-index-number">03</div>
+          <h4>Прозрачная декларация</h4>
+          <p>Если ИИ участвовал в содержании — указать модель, разделы, цель и способ применения.</p>
+        </div>
+        
+        <div class="rule-manifesto-item reveal-on-scroll">
+          <div class="rule-index-number">04</div>
+          <h4>Правила — заранее</h4>
+          <p>Преподаватель прописывает режим ИИ в программе курса до начала работы, а не постфактум.</p>
+        </div>
+        
+        <div class="rule-manifesto-item reveal-on-scroll delay-1">
+          <div class="rule-index-number">05</div>
+          <h4>Детектор — не приговор</h4>
+          <p>Отчёт «Антиплагиата» — повод для экспертизы, а не доказательство вины. Решает человек.</p>
+        </div>
+        
+        <div class="rule-manifesto-item reveal-on-scroll delay-2">
+          <div class="rule-index-number">06</div>
+          <h4>Право объяснить работу</h4>
+          <p>В спорных случаях — устная защита, где студент показывает понимание материала.</p>
+        </div>
+        
+        <div class="rule-manifesto-item reveal-on-scroll">
+          <div class="rule-index-number">07</div>
+          <h4>Защита данных</h4>
+          <p>Запрещено грузить персональные, медицинские и закрытые данные во внешние нейросети.</p>
+        </div>
+        
+        <div class="rule-manifesto-item reveal-on-scroll delay-1">
+          <div class="rule-index-number">08</div>
+          <h4>Равный доступ</h4>
+          <p>Нельзя требовать платный ИИ как обязательное условие задания — это создаёт неравенство.</p>
+        </div>
+        
+        <div class="rule-manifesto-item reveal-on-scroll delay-2">
+          <div class="rule-index-number">09</div>
+          <h4>Курс ИИ‑грамотности</h4>
+          <p>Вуз учит проверять факты, оформлять вклад ИИ и распознавать галлюцинации — а не только наказывает.</p>
+        </div>
+      </div>
+      
+      <div class="scenarios-modes-grid">
+        <div class="scenario-mode-card reveal-on-scroll">
+          <div class="mode-letter-badge">A</div>
+          <h5>ИИ запрещён</h5>
+          <p>Экзамены, проверка базовых знаний, личная рефлексия.</p>
+        </div>
+        
+        <div class="scenario-mode-card reveal-on-scroll delay-1">
+          <div class="mode-letter-badge">B</div>
+          <h5>Технический помощник</h5>
+          <p>Орфография, стиль, перевод, объяснение понятий — без декларации.</p>
+        </div>
+        
+        <div class="scenario-mode-card reveal-on-scroll delay-2">
+          <div class="mode-letter-badge">C</div>
+          <h5>С декларацией</h5>
+          <p>Черновики, structure, помощь с кодом, слайды, суммаризация.</p>
+        </div>
+        
+        <div class="scenario-mode-card reveal-on-scroll delay-3">
+          <div class="mode-letter-badge">D</div>
+          <h5>ИИ как часть задания</h5>
+          <p>Сравнить модели, поймать галлюцинации, оценить промпт.</p>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <footer class="footer-section container-wrap">
+    <div class="footer-huge-text reveal-on-scroll">
+      От запрета — к декларации.<br>
+      От наказания — к <span class="text-circled">грамотности<svg viewBox="0 0 200 80" preserveAspectRatio="none"><path d="M16,44 C8,20 70,8 120,10 C172,12 196,26 190,46 C184,66 130,76 80,73 C30,70 6,60 14,38"/></svg></span>.
+    </div>
+    
+    <div class="footer-meta-row reveal-on-scroll delay-1">медиаэтический проект · ИИ в университете · 2026</div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

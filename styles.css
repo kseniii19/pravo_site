@@ -1,0 +1,2388 @@
+/* ============ pravo — AI в университете ============ */
+:root {
+  --blue: #1a2bef;
+  --blue-deep: #0f1bb0;
+  --blue-soft: rgba(26, 43, 239, 0.14);
+  --blue-mid: rgba(26, 43, 239, 0.3);
+  --ink: #0b0c18;
+  --paper: #ffffff;
+  --paper-2: #f4f5fb;
+  --paper-3: #eef0fa;
+  --line: rgba(26, 43, 239, 0.10);
+  --grid: rgba(26, 43, 239, 0.05);
+  --green: #1fae5e;
+  --red: #e23b54;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Golos Text", system-ui, sans-serif;
+  font-size: 1.1vw;
+  line-height: 1.6;
+  letter-spacing: -0.005em;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============ СЕТКА И ДЕКОР ПОДЛОЖКИ ============ */
+
+.grid-background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 3.2vw 3.2vw;
+  mask-image: radial-gradient(120% 120% at 50% 30%, #000 55%, transparent 100%);
+}
+
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  background: radial-gradient(60vw 60vw at 85% -5%, rgba(26, 43, 239, 0.06), transparent 60%), radial-gradient(50vw 50vw at -5% 60%, rgba(26, 43, 239, 0.05), transparent 60%);
+}
+
+/* ============ ТИПОГРАФИКА И ОБЩИЕ ЭЛЕМЕНТЫ ============ */
+
+h1,
+h2,
+h3,
+.sub-kicker,
+.btn,
+.case-student-title,
+.university-abbreviation,
+.case-number {
+  font-family: "Unbounded", sans-serif;
+}
+
+.sub-kicker {
+  font-size: 0.78vw;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--blue);
+  display: inline-block;
+  margin-bottom: 1vw;
+}
+
+h2 {
+  font-size: 4.4vw;
+  line-height: 0.96;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+}
+
+h3 {
+  font-size: 1.6vw;
+  line-height: 1.05;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+.lead-text {
+  font-size: 1.45vw;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #23243a;
+  max-width: 46vw;
+}
+
+.font-mono {
+  font-family: "Space Mono", monospace;
+  font-size: 0.72vw;
+  letter-spacing: 0.2em;
+}
+
+.handwritten-note {
+  font-family: "Caveat", cursive;
+  color: var(--blue);
+  font-size: 2vw;
+  line-height: 1;
+  width: 25vw;
+}
+
+section {
+  position: relative;
+  z-index: 1;
+}
+
+.container-wrap {
+  max-width: 86vw;
+  margin: 0 auto;
+  padding: 0 2vw;
+}
+
+/* Элемент обводки от руки */
+.text-circled {
+  position: relative;
+  display: inline-block;
+  color: var(--blue);
+  white-space: nowrap;
+}
+
+.text-circled svg {
+  position: absolute;
+  left: -7%;
+  top: -22%;
+  width: 114%;
+  height: 150%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.text-circled svg path {
+  fill: none;
+  stroke: var(--blue);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 760;
+  stroke-dashoffset: 760;
+}
+
+.in .text-circled svg path {
+  transition: stroke-dashoffset 1s ease 0.25s;
+  stroke-dashoffset: 0;
+}
+
+/* Выделение текста маркером */
+.highlight-text {
+  position: relative;
+  background: var(--blue-soft);
+  border-radius: 0.2vw;
+  padding: 0.02em 0.1em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  color: var(--blue-deep);
+  font-weight: 500;
+}
+
+/* Стрелки */
+.pointer-arrow {
+  position: absolute;
+  width: 6vw;
+  height: 6vw;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.pointer-arrow path {
+  fill: none;
+  stroke: var(--blue);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 260;
+  stroke-dashoffset: 260;
+}
+
+.in .pointer-arrow path {
+  transition: stroke-dashoffset 0.9s ease 0.3s;
+  stroke-dashoffset: 0;
+}
+
+/* ============ АНИМАЦИИ ПОЯВЛЕНИЯ ПРИ СКРОЛЛЕ ============ */
+
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(2.5vw);
+  transition: opacity 0.9s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.reveal-on-scroll.in {
+  opacity: 1;
+  transform: none;
+}
+
+.reveal-on-scroll.delay-1 {
+  transition-delay: 0.1s;
+}
+
+.reveal-on-scroll.delay-2 {
+  transition-delay: 0.2s;
+}
+
+.reveal-on-scroll.delay-3 {
+  transition-delay: 0.3s;
+}
+
+.reveal-on-scroll.delay-4 {
+  transition-delay: 0.4s;
+}
+
+.reveal-on-scroll.delay-5 {
+  transition-delay: 0.5s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-on-scroll {
+    opacity: 1;
+    transform: none;
+  }
+  .text-circled svg path,
+  .pointer-arrow path {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Верхний индикатор чтения страницы */
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 0.28vw;
+  background: var(--blue);
+  z-index: 50;
+  width: 0;
+  transition: width 0.1s;
+}
+
+/* ============ HERO SECTION ============ */
+
+.hero-section {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 8vh 0;
+}
+
+.hero-section .tag-row {
+  display: flex;
+  gap: 1vw;
+  align-items: center;
+  margin-bottom: 3vw;
+}
+
+.status-dot {
+  width: 0.7vw;
+  height: 0.7vw;
+  border-radius: 50%;
+  background: var(--blue);
+}
+
+.status-dot.pulse-animation {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.6);
+    opacity: 0.5;
+  }
+}
+
+.hero-section h1 {
+  font-family: "Unbounded";
+  font-weight: 800;
+  font-size: 7.2vw;
+  line-height: 0.92;
+  text-transform: uppercase;
+  letter-spacing: -0.035em;
+  max-width: 78vw;
+  
+}
+
+.hero-section h1 .text-bold {
+  color: var(--blue);
+}
+
+
+.hero-subtitle-block {
+  display: flex;
+  gap: 4vw;
+  align-items: flex-start;
+  margin-top: 4vw;
+  flex-wrap: wrap;
+  margin-left: 57vw;
+}
+
+.hero-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5vw;
+  align-items: flex-start;
+}
+
+.btn.btn-primary.main-hero-btn {
+  margin-left: 4.5vw;
+}
+
+/* Усиленный селектор для изменения размеров, цветов и теней кнопки */
+header.hero-section .hero-subtitle-block .btn.btn-primary.main-hero-btn {
+  position: relative;
+  font-size: 1.5vw;
+  padding: 1.4vw 4vw;
+  height: auto;
+  width: auto;
+  overflow: hidden; 
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff !important; 
+  color: var(--blue) !important; 
+  border: 1.5px solid var(--blue) !important;
+  box-shadow: 0 0.8vw 2vw rgba(26, 43, 239, 0.08) !important; 
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Ховер-эффект для белой кнопки */
+header.hero-section .hero-subtitle-block .btn.btn-primary.main-hero-btn:hover {
+  transform: translateY(-0.2vw);
+  box-shadow: 0 1vw 2.5vw rgba(26, 43, 239, 0.15) !important;
+}
+
+/* Сама синяя линия сканирования */
+header.hero-section .hero-subtitle-block .btn.btn-primary.main-hero-btn .scan-line {
+  position: absolute;
+  left: 0;
+  top: -100%; 
+  width: 100%; 
+  height: 25%; 
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(26, 43, 239, 1), 
+    transparent
+  );
+  transform: none; 
+  animation: scanningTopToBottom 4s linear infinite; 
+  pointer-events: none;
+}
+
+/* Логика движения сверху вниз */
+@keyframes scanningTopToBottom {
+  0% {
+    top: -30%; 
+  }
+  60% {
+    top: 110%; 
+  }
+  100% {
+    top: 110%; 
+  }
+}
+
+
+header.hero-section .hero-subtitle-block .handwritten-note {
+  font-family: "Caveat", cursive;
+  color: var(--blue);
+  font-size: 2.2vw;
+  line-height: 1;
+  white-space: nowrap;
+  width: auto;
+}
+
+
+
+
+
+
+
+/* ============ РАЗДЕЛЫ ОБЩЕЕ ============ */
+
+.section-container {
+  padding: 13vw 0;
+}
+
+.section-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 3vw;
+  margin-bottom: 4vw;
+}
+
+.section-container .section-index {
+  font-family: "Unbounded";
+  font-weight: 800;
+  font-size: 4vw; 
+  color: var(--blue);
+  border: 2px solid var(--blue); 
+  border-radius: 50%;
+  width: 9vw; 
+  height: 9vw; 
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+
+
+.section-heading-block h2 {
+  font-size: 3.6vw; 
+  line-height: 1.05; 
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  word-spacing: 1vw;
+}
+
+.section-header .section-heading-block {
+  flex: 1;
+}
+
+.section-header .header-description {
+  max-width: 24vw;
+  color: #3a3b52;
+  font-size: 1vw;
+  line-height: 1.55;
+}
+
+/* ============ 01 INTRO SECTION ============ */
+
+.intro-content-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 5vw;
+  align-items: start;
+  margin-top: 2vw;
+}
+
+.intro-body-text {
+  margin-top: 2vw;
+  font-size: 1.45vw;
+  color: #3a3b52;
+  max-width: 38vw;
+  line-height: 1.65;
+}
+
+.question-card {
+  background: var(--ink);
+  color: #fff;
+  border-radius: 1.6vw;
+  padding: 3.4vw;
+  position: relative;
+  overflow: hidden;
+}
+
+.question-card .question-mark {
+  position: absolute;
+  right: -1vw;
+  top: -3vw;
+  font-family: "Unbounded";
+  font-weight: 800;
+  font-size: 14vw;
+  color: rgba(255, 255, 255, 0.05);
+}
+
+.question-card h3 {
+  color: #fff;
+  font-size: 2vw;
+  line-height: 1.1;
+}
+
+.question-card .question-quote {
+  font-family: "Unbounded";
+  font-weight: 600;
+  font-size: 1.4vw;
+  line-height: 1.35;
+  color: #fff;
+  margin-top: 1.6vw;
+}
+
+.question-card .question-quote b {
+  color: #9fb0ff;
+}
+
+.ethical-pillars {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7vw;
+  margin-top: 2.8vw;
+}
+
+.pill-tag {
+  border: 1.5px solid var(--line);
+  border-radius: 10vw;
+  padding: 0.6vw 1.3vw;
+  font-size: 0.88vw;
+  color: var(--blue);
+  font-family: "Unbounded";
+  font-weight: 500;
+  background: var(--paper);
+  transition: background 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.pill-tag:hover {
+  background: var(--blue);
+  color: #fff;
+  border-color: var(--blue);
+}
+
+.question-card .pill-tag {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: #9fb0ff;
+}
+
+/* ============ 02 UNIVERSITIES SECTION ============ */
+
+
+
+.regulation-scale {
+  display: flex;
+  align-items: stretch;
+  gap: 0.5vw;
+  margin: 2vw 0 4vw; /* Слегка уменьшили нижний отступ, так как уменьшали секции */
+}
+
+.regulation-scale .scale-step {
+  flex: 1;
+  text-align: center;
+  padding: 1.2vw 0.5vw;
+  border-radius: 0.9vw;
+  background: var(--blue); 
+  color: #ffffff; 
+  font-family: "Unbounded";
+  font-weight: 600;
+  font-size: 0.88vw;
+}
+
+/* Увеличиваем цифры внутри плашек */
+.regulation-scale .scale-step .scale-level {
+  display: block;
+  font-size: 1.1vw; 
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #c7d0ff; 
+  margin-bottom: 0.4vw;
+}
+
+/* Убираем разницу в фоне для активных шагов, оставляя только белый цвет цифры */
+.regulation-scale .scale-step.step-active {
+  background: var(--blue) !important; /* Тот же синий цвет, что и у остальных */
+  color: #ffffff;
+}
+
+.regulation-scale .scale-step.step-active .scale-level {
+  color: #ffffff; /* Цифра на активных шагах станет чисто белой, акцентируя внимание */
+}
+
+
+
+.universities-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2vw;
+}
+
+
+.university-card {
+  border: 3px solid var(--line); 
+  border-radius: 1.6vw;
+  padding: 2.8vw;
+  background: var(--paper);
+  transition: transform 0.4s, box-shadow 0.4s, border-color 0.4s;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6vw;
+}
+
+.university-card:hover {
+  transform: translateY(-0.5vw);
+  box-shadow: 0 2vw 4vw rgba(26, 43, 239, 0.1);
+  border-color: var(--blue); 
+}
+
+.university-top-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8vw;
+}
+
+.university-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.university-abbreviation {
+  font-family: "Unbounded";
+  font-weight: 800;
+  font-size: 2.6vw;
+  color: var(--ink);
+}
+
+.status-badge {
+  font-family: "Unbounded";
+  font-size: 0.62vw;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.35vw 0.8vw;
+  border-radius: 0.4vw;
+}
+
+.status-badge.badge-yes {
+  background: rgba(31, 174, 94, 0.12);
+  color: #1fae5e;
+}
+
+.status-badge.badge-maybe {
+  background: rgba(26, 43, 239, 0.1);
+  color: var(--blue);
+}
+
+.status-badge.badge-free {
+  background: rgba(26, 43, 239, 0.06);
+  color: #6a6c85;
+}
+
+.policy-type {
+  font-size: 0.82vw;
+  color: var(--blue);
+  font-family: "Unbounded";
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.university-quote {
+  font-size: 1vw;
+  color: #34354c;
+  line-height: 1.6;
+}
+
+.info-rows-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8vw;
+  border-top: 1px solid var(--line);
+  padding-top: 1.6vw;
+}
+
+.info-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8vw;
+  font-size: 0.9vw;
+}
+
+.info-row .info-key {
+  flex: 0 0 12vw;
+  color: #6a6c85;
+  font-size: 0.85vw;
+}
+
+.info-row .info-value {
+  font-family: "Unbounded";
+  font-weight: 600;
+  font-size: 0.8vw;
+  color: var(--ink);
+  line-height: 1.4;
+}
+
+.chip-status {
+  padding: 0.25vw 0.7vw;
+  border-radius: 0.4vw;
+  font-size: 0.75vw;
+}
+
+.chip-status.status-allowed {
+  background: rgba(31, 174, 94, 0.12);
+  color: #1fae5e;
+}
+
+.chip-status.status-forbidden {
+  background: rgba(11, 12, 24, 0.07);
+  color: #6a6c85;
+}
+
+.university-key-principle {
+  background: var(--paper-3);
+  border-radius: 0.8vw;
+  padding: 1.2vw 1.6vw;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3vw;
+}
+
+.principle-label {
+  font-family: "Unbounded";
+  font-size: 0.65vw;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--blue);
+}
+
+.principle-value {
+  font-family: "Unbounded";
+  font-size: 0.9vw;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+
+.comparison-table-wrap {
+  margin-top: 5vw;
+  border: 4px solid var(--line);
+  border-radius: 1.6vw;
+  padding: 2.4vw;
+  overflow: hidden;
+}
+
+.comparison-label {
+  font-family: "Unbounded";
+  font-size: 0.78vw;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 1.6vw;
+}
+
+.comparison-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6vw;
+}
+
+.comparison-row {
+  display: grid;
+  grid-template-columns: 14vw repeat(4, 1fr);
+  gap: 0.8vw;
+  align-items: center;
+}
+
+.comparison-row.table-header .comparison-cell {
+  font-family: "Unbounded";
+  font-weight: 700;
+  font-size: 0.8vw;
+  color: var(--blue);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.comparison-cell {
+  font-size: 0.9vw;
+  padding: 0.5vw 0.8vw;
+  border-radius: 0.5vw;
+  text-align: center;
+}
+
+.comparison-cell.cell-label {
+  text-align: left;
+  font-size: 0.88vw;
+  color: #3a3b52;
+}
+
+.comparison-row:not(.table-header) .comparison-cell:not(.cell-label) {
+  background: var(--paper-2);
+}
+
+.dot-allowed {
+  color: var(--green);
+  font-size: 1.1vw;
+  font-weight: 700;
+}
+
+.dot-forbidden {
+  color: #c0c2d5;
+  font-size: 1.1vw;
+}
+
+.section-cta {
+  margin-top: 4vw;
+  display: flex;
+  justify-content: center;
+}
+
+/* ============ 03 CASES SECTION ============ */
+
+/* Шкала прогресса над карточками */
+.case-progress-bar {
+  margin-bottom: 4vw;
+}
+
+.progress-steps-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+}
+
+.progress-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5vw;
+  cursor: default;
+  z-index: 1;
+}
+
+.progress-dot {
+  width: 1.4vw;
+  height: 1.4vw;
+  border-radius: 50%;
+  border: 2px solid var(--line);
+  background: var(--paper);
+  transition: background 0.4s, border-color 0.4s, transform 0.4s;
+}
+
+.progress-step.step-active .progress-dot {
+  background: var(--blue);
+  border-color: var(--blue);
+  transform: scale(1.3);
+}
+
+.progress-step.step-done .progress-dot {
+  background: var(--green);
+  border-color: var(--green);
+}
+
+.student-name {
+  font-family: "Unbounded";
+  font-size: 0.65vw;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #9a9cb8;
+  transition: color 0.4s;
+}
+
+.progress-step.step-active .student-name {
+  color: var(--blue);
+}
+
+.progress-step.step-done .student-name {
+  color: var(--green);
+}
+
+.progress-line {
+  flex: 1;
+  height: 2px;
+  background: var(--line);
+  min-width: 4vw;
+  max-width: 14vw;
+  transition: background 0.4s;
+}
+
+.progress-line.step-done {
+  background: var(--green);
+}
+
+/* Карусель и её карточки */
+.cases-carousel-wrapper {
+  position: relative;
+  min-height: 50vw;
+  display: block;
+}
+
+.case-card-item {
+  display: none;
+  background: var(--paper);
+  border: 1.5px solid var(--line);
+  border-radius: 2vw;
+  overflow: hidden;
+  box-shadow: 0 1vw 4vw rgba(26, 43, 239, 0.06);
+}
+
+.case-card-item.card-active {
+  display: block;
+  animation: cardIn 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.case-card-item.card-exit {
+  animation: cardOut 0.4s cubic-bezier(0.4, 0, 1, 1) both;
+}
+
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateX(3vw) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes cardOut {
+  from {
+    opacity: 1;
+    transform: none;
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-3vw) scale(0.98);
+  }
+}
+
+.case-card-top-row {
+  display: grid;
+  grid-template-columns: 1fr 36vw;
+  gap: 0;
+  min-height: 38vw;
+}
+
+.case-card-left-column {
+  padding: 3.5vw;
+  display: flex;
+  flex-direction: column;
+  gap: 2vw;
+}
+
+.case-badge-block {
+  display: flex;
+  align-items: center;
+  gap: 1.2vw;
+}
+
+.case-number {
+  font-size: 3vw;
+  font-weight: 800;
+  color: var(--blue);
+  line-height: 1;
+}
+
+.case-card-item.role-professor .case-number {
+  color: var(--blue);
+}
+
+.case-tag-label {
+  font-family: "Unbounded";
+  font-weight: 600;
+  font-size: 0.65vw;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #9a9cb8;
+  border: 1px solid var(--line);
+  border-radius: 10vw;
+  padding: 0.4vw 0.9vw;
+}
+
+.case-card-item.role-professor .case-tag-label {
+  background: rgba(26, 43, 239, 0.06);
+  color: var(--blue);
+}
+
+.case-student-title {
+  font-size: 2.2vw;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.case-subtitle-description {
+  font-size: 1vw;
+  color: #6a6c85;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.case-subtitle-description.alert-warning {
+  color: #e23b54;
+}
+
+.case-story-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1vw;
+}
+
+.case-story-text p {
+  font-size: 1.02vw;
+  line-height: 1.65;
+  color: #2c2d44;
+}
+
+.case-analysis-lens {
+  margin-top: auto;
+  background: var(--paper-3);
+  border-radius: 1vw;
+  padding: 1.6vw;
+}
+
+.lens-question {
+  font-family: "Unbounded";
+  font-size: 0.82vw;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 0.6vw;
+  line-height: 1.3;
+}
+
+.lens-answer {
+  font-size: 0.9vw;
+  color: #4a4b62;
+  line-height: 1.55;
+}
+
+/* Интерактивные визуалы справа */
+.case-card-right-column {
+  border-left: 1.5px solid var(--line);
+  position: relative;
+  overflow: hidden;
+  background: var(--paper-2);
+}
+
+.case-visual-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 2.4vw;
+  gap: 1.5vw;
+}
+
+.visual-label {
+  position: absolute;
+  bottom: 1.4vw;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.ai-generation-badge {
+  font-family: "Unbounded";
+  font-size: 0.62vw;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: var(--ink);
+  color: #fff;
+  padding: 0.35vw 0.8vw;
+  border-radius: 0.4vw;
+  white-space: nowrap;
+}
+
+.ai-generation-badge.status-warn {
+  background: #e23b54;
+}
+
+.ai-generation-badge.role-professor {
+  background: var(--blue);
+}
+
+/* Имитация кода (Кейс 1) */
+.photo-code {
+  background: #0d0f1e;
+}
+
+.code-art-mockup {
+  font-family: "Space Mono", monospace;
+  font-size: 0.82vw;
+  line-height: 1.8;
+  background: #0d0f1e;
+  border-radius: 1vw;
+  padding: 1.6vw 2vw;
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  animation: blink-cursor 1.2s step-end infinite;
+}
+
+.code-line {
+  color: #8892b0;
+}
+
+.code-line.indent-1 {
+  padding-left: 1.2vw;
+}
+
+.code-line.indent-2 {
+  padding-left: 2.4vw;
+}
+
+.code-line.indent-3 {
+  padding-left: 3.6vw;
+}
+
+.code-keyword {
+  color: #c792ea;
+}
+
+.code-variable {
+  color: #82aaff;
+}
+
+.code-function {
+  color: #89ddff;
+}
+
+.code-name {
+  color: #c3e88d;
+}
+
+.code-string {
+  color: #f78c6c;
+}
+
+.code-typing-cursor {
+  display: inline-block;
+  color: #82aaff;
+  animation: blink 0.8s step-end infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes blink-cursor {
+  50% {
+    border-color: rgba(130, 170, 255, 0.3);
+  }
+}
+
+/* Имитация чата (Кейс 2) */
+.photo-chat {
+  background: #f0f2ff;
+}
+
+.chat-art-mockup {
+  display: flex;
+  flex-direction: column;
+  gap: 1vw;
+  width: 100%;
+}
+
+.chat-message {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3vw;
+}
+
+.chat-message.message-left {
+  align-items: flex-start;
+}
+
+.chat-message.message-right {
+  align-items: flex-end;
+}
+
+.chat-speech-bubble {
+  max-width: 80%;
+  border-radius: 1.2vw;
+  padding: 0.8vw 1.2vw;
+  font-size: 0.82vw;
+  line-height: 1.5;
+}
+
+.chat-message.message-left .chat-speech-bubble {
+  background: var(--blue);
+  color: #fff;
+  border-bottom-left-radius: 0.2vw;
+}
+
+.chat-speech-bubble.bubble-real {
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-bottom-right-radius: 0.2vw;
+}
+
+.chat-speech-bubble.bubble-fake {
+  background: linear-gradient(135deg, #1a2bef, #5b72ff);
+  color: #fff;
+  border-bottom-right-radius: 0.2vw;
+  font-size: 0.78vw;
+}
+
+.chat-sender-name {
+  font-family: "Unbounded";
+  font-size: 0.58vw;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #9a9cb8;
+}
+
+.ai-label-tag {
+  background: var(--blue);
+  color: #fff;
+  border-radius: 0.3vw;
+  padding: 0.1vw 0.4vw;
+  font-size: 0.55vw;
+  margin-left: 0.4vw;
+}
+
+/* Имитация дата-графиков (Кейс 3) */
+.photo-data {
+  background: #f0f2ff;
+  flex-direction: column;
+  gap: 1.4vw;
+}
+
+.chart-bars-container {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.7vw;
+  height: 8vw;
+  padding: 0 0.5vw;
+}
+
+.bar-item {
+  flex: 1;
+  border-radius: 0.4vw 0.4vw 0 0;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 0.4vw;
+}
+
+.bar-item.bar-1 {
+  height: 75%;
+  background: linear-gradient(to top, var(--blue), #5b72ff);
+}
+
+.bar-item.bar-2 {
+  height: 90%;
+  background: linear-gradient(to top, var(--blue), #5b72ff);
+}
+
+.bar-item.bar-3 {
+  height: 58%;
+  background: linear-gradient(to top, rgba(26, 43, 239, 0.5), rgba(91, 114, 255, 0.5));
+  border: 2px dashed rgba(226, 59, 84, 0.5);
+}
+
+.bar-item.bar-4 {
+  height: 82%;
+  background: linear-gradient(to top, rgba(26, 43, 239, 0.5), rgba(91, 114, 255, 0.5));
+  border: 2px dashed rgba(226, 59, 84, 0.5);
+}
+
+.bar-value {
+  font-family: "Space Mono";
+  font-size: 0.65vw;
+  color: #fff;
+  font-weight: 700;
+}
+
+.chart-references-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5vw;
+  width: 100%;
+}
+
+.reference-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "Space Mono";
+  font-size: 0.7vw;
+  background: #fff;
+  border-radius: 0.5vw;
+  padding: 0.5vw 1vw;
+  border: 1px solid var(--line);
+}
+
+.reference-item.status-error {
+  border-color: rgba(226, 59, 84, 0.3);
+}
+
+.error-cross {
+  color: var(--red);
+  font-weight: 700;
+}
+
+/* Весы детектора (Кейс 4) */
+.photo-scale {
+  background: #f0f2ff;
+  justify-content: center;
+}
+
+.scale-art-mockup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.4vw;
+  width: 80%;
+}
+
+.scale-balance-beam {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  position: relative;
+}
+
+.scale-balance-beam::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  height: 2px;
+  background: var(--ink);
+  border-radius: 2px;
+}
+
+.scale-center-pole {
+  width: 2px;
+  height: 3vw;
+  background: var(--ink);
+  border-radius: 2px;
+  position: relative;
+  z-index: 2;
+}
+
+.scale-pan {
+  background: #fff;
+  border: 1.5px solid var(--line);
+  border-radius: 1vw;
+  padding: 1vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 9vw;
+  transition: transform 0.4s;
+  box-shadow: 0 0.5vw 1.5vw rgba(0, 0, 0, 0.08);
+}
+
+.scale-pan.pan-left.tilt-left-animation {
+  transform: translateY(-1vw);
+}
+
+.scale-pan.pan-right.tilt-right-animation {
+  transform: translateY(1vw);
+}
+
+.pan-inner-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3vw;
+}
+
+.pan-graphic-icon {
+  font-size: 1.4vw;
+}
+
+.pan-caption-text {
+  font-family: "Unbounded";
+  font-size: 0.55vw;
+  font-weight: 600;
+  text-align: center;
+  color: var(--ink);
+  line-height: 1.3;
+}
+
+.scale-final-verdict {
+  font-family: "Unbounded";
+  font-size: 0.78vw;
+  font-weight: 700;
+  color: var(--red);
+  letter-spacing: 0.05em;
+  text-align: center;
+}
+
+/* Взлом замка утечки данных (Кейс 5) */
+.photo-lock {
+  background: #0d0f1e;
+  gap: 1.4vw;
+}
+
+.lock-art-mockup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.4vw;
+  width: 100%;
+}
+
+.lock-graphic-icon {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lock-body-shape {
+  width: 5vw;
+  height: 4vw;
+  background: var(--blue);
+  border-radius: 0.8vw;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lock-surface-crack {
+  position: absolute;
+  width: 2px;
+  height: 60%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: rotate(8deg);
+  left: 50%;
+}
+
+.lock-shackle-loop {
+  width: 3.2vw;
+  height: 2vw;
+  border: 3px solid var(--blue);
+  border-bottom: none;
+  border-radius: 3vw 3vw 0 0;
+  margin-bottom: -2px;
+}
+
+.lock-shackle-loop.status-broken {
+  border-color: var(--red);
+  transform: rotate(20deg) translateX(0.5vw);
+  border-right-color: transparent;
+}
+
+.data-leak-stream {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5vw;
+  width: 100%;
+}
+
+.stream-file-item {
+  font-family: "Space Mono";
+  font-size: 0.7vw;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.4vw;
+  padding: 0.5vw 1vw;
+  color: #8892b0;
+}
+
+.stream-arrow-indicator {
+  font-family: "Space Mono";
+  font-size: 0.75vw;
+  color: var(--red);
+  font-weight: 700;
+  padding-left: 1vw;
+}
+
+/* Блок встроенного мини-квиза */
+.case-quiz-section {
+  border-top: 1.5px solid var(--line);
+  padding: 2.8vw 3.5vw;
+  background: var(--paper-2);
+}
+
+.quiz-header-block {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2vw;
+  margin-bottom: 1.8vw;
+}
+
+.quiz-status-icon {
+  font-size: 1.4vw;
+}
+
+.quiz-title-text {
+  font-family: "Unbounded";
+  font-weight: 700;
+  font-size: 1.05vw;
+  color: var(--ink);
+  margin-bottom: 0.3vw;
+}
+
+.quiz-subtitle-text {
+  font-size: 0.85vw;
+  color: #6a6c85;
+}
+
+.quiz-options-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.9vw;
+}
+
+.quiz-option-button {
+  font-family: "Golos Text";
+  font-size: 0.95vw;
+  text-align: left;
+  padding: 1.1vw 1.3vw;
+  border: 1.5px solid var(--line);
+  border-radius: 0.9vw;
+  background: var(--paper);
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, transform 0.15s;
+  color: #2c2d44;
+  line-height: 1.4;
+  display: flex;
+  gap: 0.8vw;
+  align-items: flex-start;
+}
+
+.quiz-option-button:hover {
+  border-color: var(--blue-mid);
+  transform: translateY(-0.2vw);
+}
+
+.checkbox-box {
+  flex: none;
+  width: 1.3vw;
+  height: 1.3vw;
+  border-radius: 0.35vw;
+  border: 1.5px solid var(--blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85vw;
+  color: #fff;
+  font-weight: 700;
+  margin-top: 0.1vw;
+  transition: all 0.2s;
+}
+
+.quiz-option-button.highlight-text {
+  border-color: var(--blue);
+  background: var(--blue-soft);
+}
+
+.quiz-option-button.highlight-text .checkbox-box {
+  background: var(--blue);
+}
+
+.quiz-option-button.highlight-text .checkbox-box::after {
+  content: "✓";
+}
+
+.quiz-option-button.ok {
+  border-color: #1fae5e;
+  background: rgba(31, 174, 94, 0.08);
+  cursor: default;
+  pointer-events: none;
+}
+
+.quiz-option-button.ok .checkbox-box {
+  background: #1fae5e;
+  border-color: #1fae5e;
+}
+
+.quiz-option-button.ok .checkbox-box::after {
+  content: "✓";
+}
+
+.quiz-option-button.miss {
+  border-color: #1fae5e;
+  border-style: dashed;
+  cursor: default;
+  pointer-events: none;
+}
+
+.quiz-option-button.miss .checkbox-box {
+  border-color: #1fae5e;
+}
+
+.quiz-option-button.bad {
+  border-color: var(--red);
+  background: rgba(226, 59, 84, 0.07);
+  cursor: default;
+  pointer-events: none;
+}
+
+.quiz-option-button.bad .checkbox-box {
+  background: var(--red);
+  border-color: var(--red);
+}
+
+.quiz-option-button.bad .checkbox-box::after {
+  content: "✕";
+}
+
+.quiz-control-bar {
+  display: flex;
+  align-items: center;
+  gap: 1.4vw;
+  margin-top: 1.6vw;
+}
+
+.quiz-result-message {
+  font-family: "Unbounded";
+  font-weight: 600;
+  font-size: 0.9vw;
+}
+
+.quiz-result-message.win {
+  color: var(--green);
+}
+
+.quiz-result-message.lose {
+  color: var(--red);
+}
+
+/* Плашка перехода на след. шаг */
+.case-next-step-block {
+  padding: 2vw 3.5vw;
+  border-top: 1.5px solid rgba(31, 174, 94, 0.3);
+  background: rgba(31, 174, 94, 0.05);
+  display: flex;
+  align-items: center;
+  gap: 2vw;
+}
+
+.next-step-success-text {
+  font-family: "Unbounded";
+  font-size: 0.9vw;
+  font-weight: 700;
+  color: var(--green);
+}
+
+.next-case-action {
+  background: var(--green);
+}
+
+.next-case-action:hover {
+  background: #1a9a53;
+}
+
+/* ============ 04 DECLARATION SECTION ============ */
+
+.declaration-task-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 3vw;
+}
+
+.scenario-context-box {
+  background: var(--paper-2);
+  border-radius: 1.2vw;
+  padding: 2.2vw;
+  border-left: 4px solid var(--blue);
+  display: flex;
+  flex-direction: column;
+  gap: 0.8vw;
+}
+
+.context-badge-tag {
+  font-family: "Unbounded";
+  font-size: 0.68vw;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--blue);
+}
+
+.scenario-context-box p {
+  font-size: 1.02vw;
+  color: #2c2d44;
+  line-height: 1.6;
+}
+
+/* Сама интерактивная форма */
+.declaration-form-slide {
+  background: var(--ink);
+  border-radius: 1.6vw;
+  padding: 3vw;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.declaration-form-slide::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 3.2vw 3.2vw;
+  pointer-events: none;
+}
+
+.form-slide-header {
+  display: flex;
+  align-items: center;
+  gap: 2vw;
+  margin-bottom: 1.6vw;
+  padding-bottom: 1.6vw;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  position: relative;
+}
+
+.form-university-logo {
+  font-family: "Unbounded";
+  font-size: 1.8vw;
+  font-weight: 800;
+  background: var(--blue);
+  color: #fff;
+  width: 4vw;
+  height: 4vw;
+  border-radius: 0.8vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-main-title {
+  font-family: "Unbounded";
+  font-weight: 700;
+  font-size: 1.15vw;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.form-metadata-row {
+  display: flex;
+  gap: 2.4vw;
+  font-family: "Space Mono";
+  font-size: 0.72vw;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 2vw;
+  position: relative;
+}
+
+.form-fields-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2vw;
+  position: relative;
+}
+
+.form-input-field {
+  display: grid;
+  grid-template-columns: 18vw 1fr;
+  align-items: center;
+  gap: 1.2vw;
+}
+
+.field-label-text {
+  font-family: "Unbounded";
+  font-size: 0.75vw;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.05em;
+}
+
+.field-drop-zone {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1.5px dashed rgba(255, 255, 255, 0.2);
+  border-radius: 0.7vw;
+  padding: 0.9vw 1.4vw;
+  min-height: 3.2vw;
+  display: flex;
+  align-items: center;
+  transition: border-color 0.2s, background 0.2s;
+  cursor: default;
+}
+
+.field-drop-zone.over {
+  border-color: var(--blue);
+  background: rgba(26, 43, 239, 0.15);
+}
+
+.field-drop-zone.filled {
+  border-style: solid;
+  border-color: var(--green);
+  background: rgba(31, 174, 94, 0.1);
+}
+
+.field-drop-zone.filled-wrong {
+  border-color: var(--red);
+  background: rgba(226, 59, 84, 0.1);
+}
+
+.drop-zone-placeholder {
+  font-size: 0.85vw;
+  color: rgba(255, 255, 255, 0.3);
+  font-style: italic;
+}
+
+.dsf-value {
+  font-family: "Unbounded";
+  font-size: 0.85vw;
+  font-weight: 600;
+  color: #fff;
+}
+
+.form-slide-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2vw;
+  padding-top: 1.6vw;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  position: relative;
+}
+
+.form-signature-line {
+  font-family: "Caveat";
+  font-size: 1.4vw;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.form-validation-status {
+  font-family: "Unbounded";
+  font-size: 0.8vw;
+  font-weight: 600;
+}
+
+/* Набор плашек для перетаскивания (Пул) */
+.fragments-pool-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2vw;
+}
+
+.pool-header-label {
+  font-family: "Unbounded";
+  font-size: 0.72vw;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #6a6c85;
+}
+
+.pool-items-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8vw;
+}
+/* ЗАМЕНИТЬ В CSS: Стили для плашек пула декларации с толстой серой обводкой и синим ховером */
+
+.draggable-fragment-item {
+  font-family: "Unbounded";
+  font-size: 0.82vw;
+  font-weight: 600;
+  background: var(--paper);
+  
+  /* Делаем изначальную обводку серой и толстой (было 1.5px) */
+  border: 3px solid #d1d5db !important; 
+  
+  border-radius: 0.7vw;
+  padding: 0.8vw 1.4vw;
+  cursor: grab;
+  user-select: none;
+  transition: all 0.2s ease;
+  color: var(--ink);
+}
+
+/* Эффект при наведении — контур гарантированно становится синим */
+.draggable-fragment-item:hover {
+  border-color: var(--blue) !important;
+  color: var(--blue);
+  transform: translateY(-0.2vw);
+  box-shadow: 0 0.5vw 1.5vw rgba(26, 43, 239, 0.15);
+}
+
+.draggable-fragment-item:active {
+  cursor: grabbing;
+}
+
+.draggable-fragment-item.dragging {
+  opacity: 0.4;
+  transform: scale(0.95);
+}
+
+.draggable-fragment-item.used {
+  opacity: 0.35;
+  pointer-events: none;
+  border-color: #e5e7eb !important; /* Приглушаем контур уже использованных плашек */
+}
+
+/* Полностью убираем дефолтную красную обводку у плашек-обманок */
+.draggable-fragment-item.distractor-item {
+  border-color: #d1d5db !important; /* Задаем им точно такой же серый контур */
+  color: var(--ink);
+}
+
+/* При наведении на плашки-обманки они точно так же красиво загораются синим */
+.draggable-fragment-item.distractor-item:hover {
+  border-color: var(--blue) !important;
+  color: var(--blue);
+}
+
+.declaration-control-bar {
+  display: flex;
+  align-items: center;
+  gap: 1.4vw;
+  flex-wrap: wrap;
+}
+
+.declaration-hint-text {
+  font-family: "Unbounded";
+  font-size: 0.82vw;
+  font-weight: 600;
+}
+
+.declaration-hint-text.win {
+  color: var(--green);
+}
+
+.declaration-hint-text.lose {
+  color: var(--red);
+}
+
+.declaration-success-overlay {
+  background: var(--ink);
+  border-radius: 1.6vw;
+  padding: 3vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.4vw;
+  text-align: center;
+  animation: cardIn 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.declaration-success-overlay .success-icon-badge {
+  font-size: 3vw;
+}
+
+.declaration-success-overlay .success-message-text {
+  font-family: "Unbounded";
+  font-size: 1.1vw;
+  font-weight: 600;
+  color: #fff;
+  max-width: 35vw;
+  line-height: 1.4;
+}
+
+/* ============ 05 ИГРОВОЙ РАЗДЕЛ ============ */
+
+.game-interactive-wrapper {
+  background: var(--ink);
+  color: #fff;
+  border-radius: 2vw;
+  padding: 5.5vw;
+  position: relative;
+  overflow: hidden;
+}
+
+.game-interactive-wrapper .game-inner-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 3.2vw 3.2vw;
+}
+
+.game-interactive-wrapper h2 {
+  color: #fff;
+}
+
+.game-interactive-wrapper .sub-kicker {
+  color: #9fb0ff;
+}
+
+.game-guide-text {
+  max-width: 44vw;
+  color: #c2c4e0;
+  font-size: 1.05vw;
+  margin-top: 1.8vw;
+  position: relative;
+  line-height: 1.65;
+}
+
+.game-statements-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2vw;
+  margin-top: 3.4vw;
+  position: relative;
+}
+
+.game-statement-card {
+  border: 1.5px solid rgba(255, 255, 255, 0.14);
+  border-radius: 1.1vw;
+  padding: 1.8vw;
+  cursor: pointer;
+  transition: border-color 0.25s, background 0.25s, transform 0.25s;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.game-statement-card:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-0.3vw);
+}
+
+.game-statement-card .statement-question-text {
+  font-size: 0.98vw;
+  line-height: 1.5;
+  color: #e9eaf6;
+}
+
+.game-statement-card .statement-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.2vw;
+}
+
+.game-statement-card .statement-author {
+  font-family: "Unbounded";
+  font-weight: 500;
+  font-size: 0.68vw;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #7c84c8;
+}
+
+.game-statement-card .statement-mark-box {
+  width: 1.8vw;
+  height: 1.8vw;
+  border-radius: 0.4vw;
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s;
+}
+
+.game-statement-card.flag {
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.game-statement-card.flag .statement-mark-box {
+  background: var(--blue);
+  border-color: var(--blue);
+}
+
+.game-statement-card.flag .statement-mark-box::after {
+  content: "✓";
+  color: #fff;
+  font-size: 1vw;
+}
+
+.game-statement-card.flag .statement-author {
+  color: #fff;
+}
+
+.game-statement-card.reveal {
+  cursor: default;
+}
+
+.game-statement-card.reveal:hover {
+  transform: none;
+}
+
+.game-statement-card.correct {
+  border-color: #6ee7a8;
+  background: rgba(110, 231, 168, 0.08);
+}
+
+.game-statement-card.correct .statement-mark-box {
+  background: #1fae5e;
+  border-color: #1fae5e;
+}
+
+.game-statement-card.wrong {
+  border-color: #ff7a8a;
+  background: rgba(255, 122, 138, 0.08);
+}
+
+.game-statement-card.wrong .statement-mark-box {
+  background: var(--red);
+  border-color: var(--red);
+}
+
+.game-statement-card .statement-verdict-overlay {
+  display: none;
+  font-size: 0.8vw;
+  margin-top: 1vw;
+  line-height: 1.4;
+  color: #c2c4e0;
+}
+
+.game-statement-card.reveal .statement-verdict-overlay {
+  display: block;
+}
+
+.game-control-bar {
+  display: flex;
+  align-items: center;
+  gap: 1.4vw;
+  margin-top: 3.2vw;
+  position: relative;
+  flex-wrap: wrap;
+}
+
+/* Универсальные кнопки сайта */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7vw;
+  font-family: "Unbounded";
+  font-weight: 600;
+  font-size: 0.9vw;
+  padding: 1.1vw 2.6vw;
+  border-radius: 10vw;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+}
+
+.btn:hover {
+  transform: translateY(-0.2vw);
+}
+
+.btn-primary {
+  background: var(--blue);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #3a4bff;
+  box-shadow: 0 0.8vw 2vw rgba(26, 43, 239, 0.35);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: #fff;
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+}
+
+.btn-ghost:hover {
+  border-color: #fff;
+}
+
+.game-score-counter {
+  font-family: "Unbounded";
+  font-weight: 600;
+  font-size: 0.9vw;
+  color: #9fb0ff;
+}
+
+/* Экран итоговых результатов (Оверлей) */
+.game-result-screen {
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  color: var(--ink);
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 6vw;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s;
+}
+
+.game-result-screen.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.game-result-screen .game-inner-grid {
+  background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+}
+
+.game-result-screen h2 {
+  color: var(--ink);
+  font-size: 5.6vw;
+  line-height: 0.95;
+}
+
+.game-result-screen h2 .text-bold {
+  color: var(--blue);
+}
+
+.game-result-screen .game-result-message {
+  position: relative;
+  font-family: "Unbounded";
+  font-weight: 700;
+  font-size: 3.2vw;
+  line-height: 1.05;
+  margin-top: 1.4vw;
+  text-transform: uppercase;
+}
+
+.game-result-screen .game-result-subtitle {
+  position: relative;
+  color: #4a4b62;
+  font-size: 1.15vw;
+  margin-top: 1.8vw;
+  max-width: 40vw;
+}
+
+.game-result-screen .game-retry-action-block {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 2vw;
+  margin-top: 3vw;
+}
+
+.game-result-screen .btn-primary {
+  background: var(--ink);
+}
+
+.game-result-screen .btn-primary:hover {
+  background: var(--blue);
+}
+
+.game-result-screen .handwritten-pointer {
+  position: relative;
+}
+
+/* ============ 06 IDEAL UNIVERSITY SECTION ============ */
+
+.ideal-university-wrapper {
+  background: var(--blue);
+  color: #fff;
+  border-radius: 2vw;
+  padding: 5.5vw;
+  position: relative;
+  overflow: hidden;
+}
+
+.ideal-university-wrapper .game-inner-grid {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+  background-size: 3.2vw 3.2vw;
+}
+
+.ideal-university-wrapper .sub-kicker {
+  color: #c7d0ff;
+}
+
+.ideal-university-wrapper h2 {
+  color: #fff;
+  position: relative;
+}
+
+.ideal-university-wrapper .ideal-subtitle {
+  position: relative;
+  color: #dfe3ff;
+  font-size: 1.15vw;
+  max-width: 42vw;
+  margin-top: 2vw;
+  line-height: 1.65;
+}
+
+.rules-manifesto-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.4vw;
+  margin-top: 4vw;
+}
+
+.rule-manifesto-item {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 1.3vw;
+  padding: 2.2vw;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  transition: background 0.3s, transform 0.3s;
+}
+
+.rule-manifesto-item:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-0.4vw);
+}
+
+.rule-manifesto-item .rule-index-number {
+  font-family: "Unbounded";
+  font-weight: 800;
+  font-size: 1.4vw;
+  color: #c7d0ff;
+  margin-bottom: 0.9vw;
+}
+
+.rule-manifesto-item h4 {
+  font-family: "Unbounded";
+  font-weight: 700;
+  font-size: 1.05vw;
+  line-height: 1.2;
+  margin-bottom: 0.7vw;
+}
+
+.rule-manifesto-item p {
+  font-size: 0.9vw;
+  line-height: 1.5;
+  color: #e7ebff;
+}
+
+.scenarios-modes-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.2vw;
+  margin-top: 2.8vw;
+}
+
+.scenario-mode-card {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 1.1vw;
+  padding: 1.8vw;
+}
+
+.scenario-mode-card .mode-letter-badge {
+  font-family: "Unbounded";
+  font-weight: 800;
+  font-size: 2.2vw;
+  color: #fff;
+  opacity: 0.45;
+}
+
+.scenario-mode-card h5 {
+  font-family: "Unbounded";
+  font-weight: 600;
+  font-size: 0.95vw;
+  margin: 0.5vw 0 0.7vw;
+}
+
+.scenario-mode-card p {
+  font-size: 0.82vw;
+  color: #dfe3ff;
+  line-height: 1.45;
+}
+
+/* ============ FOOTER ============ */
+
+.footer-section {
+  padding: 10vh 0 7vh;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.footer-section .footer-huge-text {
+  font-family: "Unbounded";
+  font-weight: 800;
+  font-size: 3vw;
+  line-height: 1.05;
+  text-transform: uppercase;
+  max-width: 62vw;
+  margin: 0 auto;
+}
+
+.footer-section .footer-meta-row {
+  margin-top: 2.8vw;
+  color: #6a6c85;
+  font-size: 0.85vw;
+  font-family: "Unbounded";
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* ============ СЕРВИСНЫЕ КЛАССЫ И ИСПРАВЛЕНИЯ ============ */
+
+.intro-grid .reveal-on-scroll {
+  min-width: 0;
+}
