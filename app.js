@@ -116,8 +116,29 @@
     }, 380);
   }
 
-  /* Настройка внутренней логики Квизов для каждого кейса */
+  /* Настройка внутренней логики Квизов для каждого кейса с РАНДОМИЗАЦИЕЙ ОТВЕТОВ */
   caseCards.forEach(function (card, cardIndex) {
+    const optionsListContainer = card.querySelector('.quiz-options-list');
+    
+    if (optionsListContainer) {
+      const optionButtonsArray = Array.from(optionsListContainer.querySelectorAll('.quiz-option-button'));
+      
+      /* Перемешиваем массив кнопок (Алгоритм Фишера-Йейтса) */
+      for (let i = optionButtonsArray.length - 1; i > 0; i--) {
+        const randomIndex = Math.floor(Math.random() * (i + 1));
+        const temporaryValue = optionButtonsArray[i];
+        optionButtonsArray[i] = optionButtonsArray[randomIndex];
+        optionButtonsArray[randomIndex] = temporaryValue;
+      }
+      
+      /* Очищаем контейнер и вставляем кнопки в случайном порядке */
+      optionsListContainer.innerHTML = '';
+      optionButtonsArray.forEach(function (button) {
+        optionsListContainer.appendChild(button);
+      });
+    }
+
+    /* Собираем кнопки заново, так как их порядок в DOM изменился */
     const optionButtons = card.querySelectorAll('.quiz-option-button');
     const quizCheckButton = card.querySelector('.quiz-check-action');
     const resultMessageElement = card.querySelector('.quiz-result-message');
@@ -203,6 +224,7 @@
       });
     }
   });
+
 
   updateCaseProgressUi();
 
