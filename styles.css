@@ -1858,7 +1858,6 @@ header.hero-section .hero-subtitle-block .handwritten-note {
   flex-wrap: wrap;
   gap: 0.8vw;
 }
-/* ЗАМЕНИТЬ В CSS: Стили для плашек пула декларации с толстой серой обводкой и синим ховером */
 
 .draggable-fragment-item {
   font-family: "Unbounded";
