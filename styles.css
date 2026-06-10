@@ -895,11 +895,11 @@ header.hero-section .hero-subtitle-block .handwritten-note {
 
 .case-card-item {
   display: none;
-  background: var(--paper);
-  border: 1.5px solid var(--line);
-  border-radius: 2vw;
-  overflow: hidden;
-  box-shadow: 0 1vw 4vw rgba(26, 43, 239, 0.06);
+  background: transparent; /* Сделали прозрачным, так как у каждой колонки теперь свой фон */
+  border: none; /* Убрали общую рамку */
+  border-radius: 0;
+  overflow: visible; /* Чтобы раздельные тени колонок не обрезались */
+  box-shadow: none;
 }
 
 .case-card-item.card-active {
@@ -935,9 +935,9 @@ header.hero-section .hero-subtitle-block .handwritten-note {
 
 .case-card-top-row {
   display: grid;
-  grid-template-columns: 1fr 36vw;
-  gap: 0;
-  min-height: 38vw;
+  grid-template-columns: 1fr 42vw; /* Увеличили ширину правой части с 36vw до 42vw */
+  gap: 1.5vw; /* Создаем аккуратный физический зазор между белой и темной карточками */
+  min-height: auto;
 }
 
 .case-card-left-column {
@@ -945,6 +945,10 @@ header.hero-section .hero-subtitle-block .handwritten-note {
   display: flex;
   flex-direction: column;
   gap: 2vw;
+  background: var(--paper);
+  border: 1.5px solid var(--line);
+  border-radius: 2vw;
+  box-shadow: 0 1vw 3vw rgba(26, 43, 239, 0.04);
 }
 
 .case-badge-block {
@@ -1035,10 +1039,20 @@ header.hero-section .hero-subtitle-block .handwritten-note {
 
 /* Интерактивные визуалы справа */
 .case-card-right-column {
-  border-left: 1.5px solid var(--line);
+  background: var(--ink);
+  color: #ffffff;
+  padding: 3.5vw 3vw;
   position: relative;
-  overflow: hidden;
-  background: var(--paper-2);
+  
+  /* Переносим скругления и тени на саму карточку */
+  border-radius: 2vw;
+  box-shadow: 0 1vw 4vw rgba(11, 12, 24, 0.15);
+  border-left: none;
+  
+  /* Делаем её автовытягивающейся по длине текста, убирая внутренний скролл */
+  overflow-y: visible; 
+  max-height: none; 
+  min-height: 100%; /
 }
 
 .case-visual-container {
@@ -1081,403 +1095,84 @@ header.hero-section .hero-subtitle-block .handwritten-note {
   background: var(--blue);
 }
 
-/* Имитация кода (Кейс 1) */
-.photo-code {
-  background: #0d0f1e;
+/* ЗАМЕНИТЬ В CSS: Стили для новой правой карточки разбора этики */
+
+.case-card-right-column.lens-dark-card {
+  background: var(--ink); /* Точно такой же глубокий темный цвет, как у q-card */
+  color: #ffffff;
+  padding: 3vw 2.5vw;
+  position: relative;
+  overflow-y: auto; /* Позволяет комфортно скроллить текст, если экран небольшой */
+  max-height: 38vw; /* Фиксирует высоту вровень с левой колонкой */
+  border-left: none;
 }
 
-.code-art-mockup {
-  font-family: "Space Mono", monospace;
-  font-size: 0.82vw;
-  line-height: 1.8;
-  background: #0d0f1e;
+/* Стилизация внутреннего скроллбара для аккуратного вида */
+.case-card-right-column.lens-dark-card::-webkit-scrollbar {
+  width: 0.4vw;
+}
+.case-card-right-column.lens-dark-card::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+}
+.case-card-right-column.lens-dark-card::-webkit-scrollbar-thumb {
+  background: rgba(26, 43, 239, 0.3);
   border-radius: 1vw;
-  padding: 1.6vw 2vw;
-  width: 100%;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  animation: blink-cursor 1.2s step-end infinite;
 }
 
-.code-line {
-  color: #8892b0;
-}
-
-.code-line.indent-1 {
-  padding-left: 1.2vw;
-}
-
-.code-line.indent-2 {
-  padding-left: 2.4vw;
-}
-
-.code-line.indent-3 {
-  padding-left: 3.6vw;
-}
-
-.code-keyword {
-  color: #c792ea;
-}
-
-.code-variable {
-  color: #82aaff;
-}
-
-.code-function {
-  color: #89ddff;
-}
-
-.code-name {
-  color: #c3e88d;
-}
-
-.code-string {
-  color: #f78c6c;
-}
-
-.code-typing-cursor {
-  display: inline-block;
-  color: #82aaff;
-  animation: blink 0.8s step-end infinite;
-}
-
-@keyframes blink {
-  50% {
-    opacity: 0;
-  }
-}
-
-@keyframes blink-cursor {
-  50% {
-    border-color: rgba(130, 170, 255, 0.3);
-  }
-}
-
-/* Имитация чата (Кейс 2) */
-.photo-chat {
-  background: #f0f2ff;
-}
-
-.chat-art-mockup {
-  display: flex;
-  flex-direction: column;
-  gap: 1vw;
-  width: 100%;
-}
-
-.chat-message {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3vw;
-}
-
-.chat-message.message-left {
-  align-items: flex-start;
-}
-
-.chat-message.message-right {
-  align-items: flex-end;
-}
-
-.chat-speech-bubble {
-  max-width: 80%;
-  border-radius: 1.2vw;
-  padding: 0.8vw 1.2vw;
-  font-size: 0.82vw;
-  line-height: 1.5;
-}
-
-.chat-message.message-left .chat-speech-bubble {
-  background: var(--blue);
-  color: #fff;
-  border-bottom-left-radius: 0.2vw;
-}
-
-.chat-speech-bubble.bubble-real {
-  background: #fff;
-  color: var(--ink);
-  border: 1px solid var(--line);
-  border-bottom-right-radius: 0.2vw;
-}
-
-.chat-speech-bubble.bubble-fake {
-  background: linear-gradient(135deg, #1a2bef, #5b72ff);
-  color: #fff;
-  border-bottom-right-radius: 0.2vw;
-  font-size: 0.78vw;
-}
-
-.chat-sender-name {
-  font-family: "Unbounded";
-  font-size: 0.58vw;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #9a9cb8;
-}
-
-.ai-label-tag {
-  background: var(--blue);
-  color: #fff;
-  border-radius: 0.3vw;
-  padding: 0.1vw 0.4vw;
-  font-size: 0.55vw;
-  margin-left: 0.4vw;
-}
-
-/* Имитация дата-графиков (Кейс 3) */
-.photo-data {
-  background: #f0f2ff;
-  flex-direction: column;
-  gap: 1.4vw;
-}
-
-.chart-bars-container {
-  display: flex;
-  align-items: flex-end;
-  gap: 0.7vw;
-  height: 8vw;
-  padding: 0 0.5vw;
-}
-
-.bar-item {
-  flex: 1;
-  border-radius: 0.4vw 0.4vw 0 0;
-  position: relative;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  padding-top: 0.4vw;
-}
-
-.bar-item.bar-1 {
-  height: 75%;
-  background: linear-gradient(to top, var(--blue), #5b72ff);
-}
-
-.bar-item.bar-2 {
-  height: 90%;
-  background: linear-gradient(to top, var(--blue), #5b72ff);
-}
-
-.bar-item.bar-3 {
-  height: 58%;
-  background: linear-gradient(to top, rgba(26, 43, 239, 0.5), rgba(91, 114, 255, 0.5));
-  border: 2px dashed rgba(226, 59, 84, 0.5);
-}
-
-.bar-item.bar-4 {
-  height: 82%;
-  background: linear-gradient(to top, rgba(26, 43, 239, 0.5), rgba(91, 114, 255, 0.5));
-  border: 2px dashed rgba(226, 59, 84, 0.5);
-}
-
-.bar-value {
-  font-family: "Space Mono";
-  font-size: 0.65vw;
-  color: #fff;
-  font-weight: 700;
-}
-
-.chart-references-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5vw;
-  width: 100%;
-}
-
-.reference-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-family: "Space Mono";
-  font-size: 0.7vw;
-  background: #fff;
-  border-radius: 0.5vw;
-  padding: 0.5vw 1vw;
-  border: 1px solid var(--line);
-}
-
-.reference-item.status-error {
-  border-color: rgba(226, 59, 84, 0.3);
-}
-
-.error-cross {
-  color: var(--red);
-  font-weight: 700;
-}
-
-/* Весы детектора (Кейс 4) */
-.photo-scale {
-  background: #f0f2ff;
-  justify-content: center;
-}
-
-.scale-art-mockup {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.4vw;
-  width: 80%;
-}
-
-.scale-balance-beam {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  position: relative;
-}
-
-.scale-balance-beam::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 70%;
-  height: 2px;
-  background: var(--ink);
-  border-radius: 2px;
-}
-
-.scale-center-pole {
-  width: 2px;
-  height: 3vw;
-  background: var(--ink);
-  border-radius: 2px;
+.lens-card-content {
   position: relative;
   z-index: 2;
-}
-
-.scale-pan {
-  background: #fff;
-  border: 1.5px solid var(--line);
-  border-radius: 1vw;
-  padding: 1vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 9vw;
-  transition: transform 0.4s;
-  box-shadow: 0 0.5vw 1.5vw rgba(0, 0, 0, 0.08);
-}
-
-.scale-pan.pan-left.tilt-left-animation {
-  transform: translateY(-1vw);
-}
-
-.scale-pan.pan-right.tilt-right-animation {
-  transform: translateY(1vw);
-}
-
-.pan-inner-content {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 0.3vw;
+  gap: 1.8vw;
 }
 
-.pan-graphic-icon {
-  font-size: 1.4vw;
-}
-
-.pan-caption-text {
-  font-family: "Unbounded";
-  font-size: 0.55vw;
-  font-weight: 600;
-  text-align: center;
-  color: var(--ink);
-  line-height: 1.3;
-}
-
-.scale-final-verdict {
-  font-family: "Unbounded";
-  font-size: 0.78vw;
-  font-weight: 700;
-  color: var(--red);
-  letter-spacing: 0.05em;
-  text-align: center;
-}
-
-/* Взлом замка утечки данных (Кейс 5) */
-.photo-lock {
-  background: #0d0f1e;
-  gap: 1.4vw;
-}
-
-.lock-art-mockup {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.4vw;
-  width: 100%;
-}
-
-.lock-graphic-icon {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.lock-body-shape {
-  width: 5vw;
-  height: 4vw;
-  background: var(--blue);
-  border-radius: 0.8vw;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.lock-surface-crack {
+/* Огромный полупрозрачный знак вопроса на бэкграунде карточки */
+.lens-card-bg-mark {
   position: absolute;
-  width: 2px;
-  height: 60%;
-  background: rgba(255, 255, 255, 0.3);
-  transform: rotate(8deg);
-  left: 50%;
+  right: -2vw;
+  top: -4vw;
+  font-family: "Unbounded";
+  font-weight: 800;
+  font-size: 15vw;
+  color: rgba(255, 255, 255, 0.03);
+  pointer-events: none;
+  z-index: 1;
 }
 
-.lock-shackle-loop {
-  width: 3.2vw;
-  height: 2vw;
-  border: 3px solid var(--blue);
-  border-bottom: none;
-  border-radius: 3vw 3vw 0 0;
-  margin-bottom: -2px;
+.lens-card-main-title {
+  font-size: 1.1vw;
+  color: #9fb0ff; /* Приятный акцентный голубой оттенок */
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5vw;
 }
 
-.lock-shackle-loop.status-broken {
-  border-color: var(--red);
-  transform: rotate(20deg) translateX(0.5vw);
-  border-right-color: transparent;
-}
-
-.data-leak-stream {
+.lens-qa-item {
   display: flex;
   flex-direction: column;
   gap: 0.5vw;
-  width: 100%;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 1.4vw;
 }
 
-.stream-file-item {
-  font-family: "Space Mono";
-  font-size: 0.7vw;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 0.4vw;
-  padding: 0.5vw 1vw;
-  color: #8892b0;
+.lens-qa-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
 }
 
-.stream-arrow-indicator {
-  font-family: "Space Mono";
-  font-size: 0.75vw;
-  color: var(--red);
+.lens-qa-item h5 {
+  font-family: "Unbounded";
   font-weight: 700;
-  padding-left: 1vw;
+  font-size: 0.9vw;
+  line-height: 1.35;
+  color: #ffffff;
+}
+
+.lens-qa-item p {
+  font-size: 0.85vw;
+  line-height: 1.6;
+  color: #cbd5e1; /* Приглушенный светло-серый для комфортного чтения больших абзацев */
 }
 
 /* Блок встроенного мини-квиза */
@@ -2240,11 +1935,13 @@ header.hero-section .hero-subtitle-block .handwritten-note {
 
 /* ============ 06 IDEAL UNIVERSITY SECTION ============ */
 
+/* ЗАМЕНИТЬ В CSS: Обновленный компактный блок идеального вуза */
+
 .ideal-university-wrapper {
   background: var(--blue);
   color: #fff;
   border-radius: 2vw;
-  padding: 5.5vw;
+  padding: 4.5vw; /* Уменьшили внутренние отступы синей зоны (было 5.5vw) */
   position: relative;
   overflow: hidden;
 }
@@ -2279,7 +1976,7 @@ header.hero-section .hero-subtitle-block .handwritten-note {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.4vw;
-  margin-top: 4vw;
+  margin-top: 3.5vw; 
 }
 
 .rule-manifesto-item {
