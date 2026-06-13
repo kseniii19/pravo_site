@@ -2049,10 +2049,11 @@ header.hero-section .hero-subtitle-block .handwritten-note {
   line-height: 1.45;
 }
 
-/* ============ FOOTER ============ */
 
+
+/* ============ FOOTER ============ */
 .footer-section {
-  padding: 10vh 0 7vh;
+  padding: 10vh 0 4vw; 
   text-align: center;
   position: relative;
   z-index: 1;
@@ -2065,7 +2066,8 @@ header.hero-section .hero-subtitle-block .handwritten-note {
   line-height: 1.05;
   text-transform: uppercase;
   max-width: 62vw;
-  margin: 0 auto;
+  margin-top: -5vw;
+  margin-left: 10vw;
 }
 
 .footer-section .footer-meta-row {
@@ -2077,8 +2079,73 @@ header.hero-section .hero-subtitle-block .handwritten-note {
   text-transform: uppercase;
 }
 
-/* ============ СЕРВИСНЫЕ КЛАССЫ И ИСПРАВЛЕНИЯ ============ */
-
 .intro-grid .reveal-on-scroll {
   min-width: 0;
+}
+
+
+
+
+/* Контейнер бегущей строки */
+.running-line-wrapper {
+  overflow: hidden;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  background: var(--paper-2); 
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 1.8vw 0;
+  margin-top: 2vw;    
+  margin-bottom: 0;  
+  display: flex;
+  align-items: center;
+}
+
+/* Трек анимации */
+.running-line-track {
+  display: flex;
+  width: max-content;
+  white-space: nowrap;
+  animation: scrollMarquee 25s linear infinite;
+}
+
+/* Стили текста */
+.running-line-track span {
+  font-family: 'Golos Text', sans-serif;
+  font-size: clamp(14px, 1.1vw, 18px); 
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: rgba(11, 12, 24, 0.6); 
+  padding: 0 3.5vw;
+  position: relative;
+  display: inline-block;
+}
+
+/* Разделительные точки */
+.running-line-track span::after {
+  content: "·";
+  position: absolute;
+  right: -0.2vw;
+  color: var(--blue); 
+  font-weight: 700;
+}
+
+/* Ключевые кадры для бесконечного скролла */
+@keyframes scrollMarquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Пауза при наведении */
+.running-line-wrapper:hover .running-line-track {
+  animation-play-state: paused;
 }
